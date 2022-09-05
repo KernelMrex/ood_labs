@@ -1,9 +1,9 @@
-#include "lib/DecoyDuck.h"
+#include "lib/Duck/DecoyDuck.h"
+#include "lib/Duck/MallardDuck.h"
+#include "lib/Duck/ModelDuck.h"
+#include "lib/Duck/RedheadDuck.h"
+#include "lib/Duck/RubberDuck.h"
 #include "lib/DuckFunctions.h"
-#include "lib/MallardDuck.h"
-#include "lib/ModelDuck.h"
-#include "lib/RedheadDuck.h"
-#include "lib/RubberDuck.h"
 #include <cstdlib>
 
 int main()
@@ -25,7 +25,6 @@ int main()
 
 	modelDuck.SetFlyBehavior(std::make_unique<FlyWithWings>());
 	PlayWithDuck(modelDuck);
-
 
 	return EXIT_SUCCESS;
 }

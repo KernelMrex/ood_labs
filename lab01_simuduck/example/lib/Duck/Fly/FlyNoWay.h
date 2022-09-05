@@ -9,5 +9,4 @@ public:
 	void Fly() override {}
 };
 
-
 #endif

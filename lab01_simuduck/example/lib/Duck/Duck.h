@@ -1,8 +1,8 @@
 #ifndef DUCK_H
 #define DUCK_H
 
-#include "IFlyBehavior.h"
-#include "IQuakBehavior.h"
+#include "Fly/IFlyBehavior.h"
+#include "Quack/IQuakBehavior.h"
 
 #include <cassert>
 #include <iostream>

@@ -2,8 +2,9 @@
 #define MODELDUCK_H
 
 #include "Duck.h"
-#include "FlyNoWay.h"
-#include "QuackBehavior.h"
+#include "Fly/FlyNoWay.h"
+#include "Quack/QuackBehavior.h"
+
 class ModelDuck : public Duck
 {
 public:
@@ -19,6 +20,5 @@ public:
 
 	void Dance() override {}
 };
-
 
 #endif

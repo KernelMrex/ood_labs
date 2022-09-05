@@ -9,5 +9,4 @@ public:
 	void Quack() override {}
 };
 
-
 #endif

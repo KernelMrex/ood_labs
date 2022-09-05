@@ -2,8 +2,8 @@
 #define MALLARDDUCK_H
 
 #include "Duck.h"
-#include "FlyWithWings.h"
-#include "QuackBehavior.h"
+#include "Fly/FlyWithWings.h"
+#include "Quack/QuackBehavior.h"
 
 class MallardDuck : public Duck
 {

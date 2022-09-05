@@ -1,7 +1,7 @@
 #ifndef DUCKFUNCTIONS_H
 #define DUCKFUNCTIONS_H
 
-#include "Duck.h"
+#include "Duck/Duck.h"
 
 void DrawDuck(Duck const& duck)
 {
@@ -17,4 +17,4 @@ void PlayWithDuck(Duck& duck)
 	std::cout << std::endl;
 }
 
-#endif // DUCKFUNCTIONS_H
+#endif

@@ -5,19 +5,19 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(
         lab01_simuduck_example
-        example/lib/IFlyBehavior.h
-        example/lib/FlyWithWings.h
-        example/lib/FlyNoWay.h
-        example/lib/IQuakBehavior.h
-        example/lib/QuackBehavior.h
-        example/lib/SqueakBehavior.h
-        example/lib/MuteQuackBehavior.h
-        example/lib/Duck.h
-        example/lib/MallardDuck.h
-        example/lib/RedheadDuck.h
-        example/lib/DecoyDuck.h
-        example/lib/RubberDuck.h
-        example/lib/ModelDuck.h
+        example/lib/Duck/Fly/IFlyBehavior.h
+        example/lib/Duck/Fly/FlyWithWings.h
+        example/lib/Duck/Fly/FlyNoWay.h
+        example/lib/Duck/Quack/IQuakBehavior.h
+        example/lib/Duck/Quack/QuackBehavior.h
+        example/lib/Duck/Quack/SqueakBehavior.h
+        example/lib/Duck/Quack/MuteQuackBehavior.h
+        example/lib/Duck/Duck.h
+        example/lib/Duck/MallardDuck.h
+        example/lib/Duck/RedheadDuck.h
+        example/lib/Duck/DecoyDuck.h
+        example/lib/Duck/RubberDuck.h
+        example/lib/Duck/ModelDuck.h
         example/lib/DuckFunctions.h
         example/main.cpp
 )

@@ -44,3 +44,27 @@ add_executable(
         task1/lib/Dance/MinuetDanceStrategy.h
         task1/lib/Dance/CantDanceStrategy.h
 )
+
+add_executable(
+        lab01_simuduck_task2
+        task2/lib/Fly/IFlyBehavior.h
+        task2/lib/Fly/FlyWithWings.h
+        task2/lib/Fly/FlyNoWay.h
+        task2/lib/Quack/IQuakBehavior.h
+        task2/lib/Quack/QuackBehavior.h
+        task2/lib/Quack/SqueakBehavior.h
+        task2/lib/Quack/MuteQuackBehavior.h
+        task2/lib/Duck/Duck.h
+        task2/lib/Duck/MallardDuck.h
+        task2/lib/Duck/RedheadDuck.h
+        task2/lib/Duck/DecoyDuck.h
+        task2/lib/Duck/RubberDuck.h
+        task2/lib/Duck/ModelDuck.h
+        task2/lib/DuckFunctions.h
+        task2/lib/Dance/IDanceStrategy.h
+        task2/lib/Dance/WaltzDanceStrategy.h
+        task2/lib/Dance/MinuetDanceStrategy.h
+        task2/lib/Dance/CantDanceStrategy.h
+        task2/main.cpp
+)
+

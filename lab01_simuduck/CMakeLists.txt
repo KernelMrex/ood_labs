@@ -68,3 +68,10 @@ add_executable(
         task2/main.cpp
 )
 
+add_executable(
+        lab01_simuduck_task3
+        task3/lib/DuckContext.h
+        task3/main.cpp
+        task3/lib/Dance.h
+        task3/lib/Quack.h
+        task3/lib/Fly.h)

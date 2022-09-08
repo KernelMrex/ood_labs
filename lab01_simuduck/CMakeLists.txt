@@ -8,7 +8,7 @@ add_executable(
         example/lib/Duck/Fly/IFlyBehavior.h
         example/lib/Duck/Fly/FlyWithWings.h
         example/lib/Duck/Fly/FlyNoWay.h
-        example/lib/Duck/Quack/IQuakBehavior.h
+        example/lib/Duck/Quack/IQuackBehavior.h
         example/lib/Duck/Quack/QuackBehavior.h
         example/lib/Duck/Quack/SqueakBehavior.h
         example/lib/Duck/Quack/MuteQuackBehavior.h
@@ -27,7 +27,7 @@ add_executable(
         task1/lib/Fly/IFlyBehavior.h
         task1/lib/Fly/FlyWithWings.h
         task1/lib/Fly/FlyNoWay.h
-        task1/lib/Quack/IQuakBehavior.h
+        task1/lib/Quack/IQuackBehavior.h
         task1/lib/Quack/QuackBehavior.h
         task1/lib/Quack/SqueakBehavior.h
         task1/lib/Quack/MuteQuackBehavior.h
@@ -50,7 +50,7 @@ add_executable(
         task2/lib/Fly/IFlyBehavior.h
         task2/lib/Fly/FlyWithWings.h
         task2/lib/Fly/FlyNoWay.h
-        task2/lib/Quack/IQuakBehavior.h
+        task2/lib/Quack/IQuackBehavior.h
         task2/lib/Quack/QuackBehavior.h
         task2/lib/Quack/SqueakBehavior.h
         task2/lib/Quack/MuteQuackBehavior.h
@@ -74,4 +74,5 @@ add_executable(
         task3/main.cpp
         task3/lib/Dance.h
         task3/lib/Quack.h
-        task3/lib/Fly.h)
+        task3/lib/Fly.h
+)

@@ -1,7 +1,7 @@
 #ifndef SQUEAKBEHAVIOR_H
 #define SQUEAKBEHAVIOR_H
 
-#include "IQuakBehavior.h"
+#include "IQuackBehavior.h"
 #include <iostream>
 
 class SqueakBehavior : public IQuackBehavior

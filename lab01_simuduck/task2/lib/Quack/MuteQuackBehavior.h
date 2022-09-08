@@ -1,7 +1,7 @@
 #ifndef MUTEQUAKBEHAVIOR_H
 #define MUTEQUAKBEHAVIOR_H
 
-#include "IQuakBehavior.h"
+#include "IQuackBehavior.h"
 
 class MuteQuackBehavior : public IQuackBehavior
 {

@@ -1,7 +1,7 @@
 #ifndef QUACKBEHAVIOR_H
 #define QUACKBEHAVIOR_H
 
-#include "IQuakBehavior.h"
+#include "IQuackBehavior.h"
 #include <iostream>
 
 class QuackBehavior : public IQuackBehavior

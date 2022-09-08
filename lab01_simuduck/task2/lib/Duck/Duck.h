@@ -3,7 +3,7 @@
 
 #include "../Dance/IDanceStrategy.h"
 #include "../Fly/IFlyBehavior.h"
-#include "../Quack/IQuakBehavior.h"
+#include "../Quack/IQuackBehavior.h"
 
 #include <cassert>
 #include <iostream>

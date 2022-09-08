@@ -9,19 +9,20 @@ void PlayWithDuck(const DuckContext& duckCtx)
 {
 	duckCtx.PerformQuack();
 	duckCtx.PerformFly();
+	duckCtx.PerformFly();
 	duckCtx.PerformDanceStrategy();
 	std::cout << std::endl;
 }
 
 int main()
 {
-	DuckContext mallardDuck(FlyWithWings, Quack, Waltz);
+	DuckContext mallardDuck(GetFlyWithWingsFn(), Quack, Waltz);
 	PlayWithDuck(mallardDuck);
 
-	DuckContext redheadDuck(FlyWithWings, Quack, Minuet);
+	DuckContext redheadDuck(GetFlyWithWingsFn(), Quack, Minuet);
 	PlayWithDuck(redheadDuck);
 
-	DuckContext rubberDuck(FlyWithWings, Squeak, CantDance);
+	DuckContext rubberDuck(GetFlyWithWingsFn(), Squeak, CantDance);
 	PlayWithDuck(rubberDuck);
 
 	DuckContext decoyDuck(FlyNoWay, Mute, CantDance);

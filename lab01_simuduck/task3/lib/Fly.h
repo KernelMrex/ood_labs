@@ -3,13 +3,18 @@
 
 #include <iostream>
 
+using FlyStrategy = std::function<void()>;
+
 void FlyNoWay()
 {
 }
 
-void FlyWithWings()
+FlyStrategy GetFlyWithWingsFn()
 {
-	std::cout << "I'm flying with wings!!" << std::endl;
+	uint timesFlew = 0;
+	return [&timesFlew]() -> void {
+		std::cout << "I'm flying with wings!! Times: " << timesFlew++ << std::endl;
+	};
 }
 
 #endif

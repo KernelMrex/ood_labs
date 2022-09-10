@@ -1,12 +1,19 @@
 #include "lib/Dance.h"
+#include "lib/Display.h"
 #include "lib/DuckContext.h"
 #include "lib/Fly.h"
 #include "lib/Quack.h"
 #include <cstdlib>
 #include <iostream>
 
+void DrawDuck(const DuckContext& duck)
+{
+	duck.PerformDisplay();
+}
+
 void PlayWithDuck(const DuckContext& duckCtx)
 {
+	DrawDuck(duckCtx);
 	duckCtx.PerformQuack();
 	duckCtx.PerformFly();
 	duckCtx.PerformFly();
@@ -16,19 +23,19 @@ void PlayWithDuck(const DuckContext& duckCtx)
 
 int main()
 {
-	DuckContext mallardDuck(GetFlyWithWingsFn(), Quack, Waltz);
+	DuckContext mallardDuck(MallardDuckDisplay, GetFlyWithWingsFn(), Quack, Waltz);
 	PlayWithDuck(mallardDuck);
 
-	DuckContext redheadDuck(GetFlyWithWingsFn(), Quack, Minuet);
+	DuckContext redheadDuck(RedheadDuckDisplay, GetFlyWithWingsFn(), Quack, Minuet);
 	PlayWithDuck(redheadDuck);
 
-	DuckContext rubberDuck(GetFlyWithWingsFn(), Squeak, CantDance);
+	DuckContext rubberDuck(RubberDuckDisplay, GetFlyWithWingsFn(), Squeak, CantDance);
 	PlayWithDuck(rubberDuck);
 
-	DuckContext decoyDuck(FlyNoWay, Mute, CantDance);
+	DuckContext decoyDuck(DecoyDuckDisplay, FlyNoWay, Mute, CantDance);
 	PlayWithDuck(decoyDuck);
 
-	DuckContext modelDuck(FlyNoWay, Quack, CantDance);
+	DuckContext modelDuck(ModelDuckDisplay, FlyNoWay, Quack, CantDance);
 	PlayWithDuck(decoyDuck);
 
 	return EXIT_SUCCESS;

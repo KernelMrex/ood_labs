@@ -75,4 +75,4 @@ add_executable(
         task3/lib/Dance.h
         task3/lib/Quack.h
         task3/lib/Fly.h
-)
+        task3/lib/Display.h)

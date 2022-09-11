@@ -5,5 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(
         lab02_weather_station_example
-
-        example/WeatherStation/main.cpp example/WeatherStation/WeatherData.h example/WeatherStation/Observer.h)
+        example/WeatherStation/main.cpp
+        example/WeatherStation/WeatherData.h
+        example/WeatherStation/Observer.h
+)

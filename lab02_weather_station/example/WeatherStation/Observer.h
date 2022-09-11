@@ -1,8 +1,6 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-#pragma once
-
 #include <functional>
 #include <set>
 

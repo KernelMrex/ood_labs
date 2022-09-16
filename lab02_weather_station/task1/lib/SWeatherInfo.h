@@ -1,33 +1,13 @@
-#ifndef WEATHERDATA_H
-#define WEATHERDATA_H
+#ifndef SWEATHERINFO_H
+#define SWEATHERINFO_H
 
-#include "Observer.h"
-#include <algorithm>
-#include <climits>
-#include <iostream>
-#include <vector>
+#include "CObservable.h"
 
 struct SWeatherInfo
 {
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
-};
-
-class CDisplay : public IObserver<SWeatherInfo>
-{
-private:
-	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
-		Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
-		остается публичным
-	*/
-	void Update(SWeatherInfo const& data) override
-	{
-		std::cout << "Current Temp " << data.temperature << std::endl;
-		std::cout << "Current Hum " << data.humidity << std::endl;
-		std::cout << "Current Pressure " << data.pressure << std::endl;
-		std::cout << "----------------" << std::endl;
-	}
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
@@ -79,4 +59,4 @@ private:
 	double m_pressure = 760.0;
 };
 
-#endif // WEATHERDATA_H
+#endif // SWEATHERINFO_H

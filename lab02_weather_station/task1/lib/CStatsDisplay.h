@@ -1,7 +1,8 @@
 #ifndef CSTATSDISPLAY_H
 #define CSTATSDISPLAY_H
 
-#include "../WeatherData.h"
+#include "IObserver.h"
+#include "SWeatherInfo.h"
 #include <functional>
 #include <utility>
 

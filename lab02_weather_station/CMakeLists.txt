@@ -13,7 +13,11 @@ add_executable(
 add_executable(
         lab02_weather_station_task1
         task1/main.cpp
-        task1/WeatherData.h
-        task1/Observer.h
         task1/lib/CStatsDisplay.h
-        task1/lib/Measurement.h)
+        task1/lib/Measurement.h
+        task1/lib/CDisplay.h
+        task1/lib/SWeatherInfo.h
+        task1/lib/IObservable.h
+        task1/lib/IObserver.h
+        task1/lib/CObservable.h
+)

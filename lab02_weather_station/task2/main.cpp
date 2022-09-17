@@ -1,5 +1,6 @@
 #include "lib/CDisplay.h"
 #include "lib/CStatsDisplay.h"
+#include "lib/CWeatherData.h"
 #include "lib/Measurement.h"
 
 int main()

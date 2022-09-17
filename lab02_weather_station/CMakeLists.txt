@@ -32,4 +32,5 @@ add_executable(
         task2/lib/IObservable.h
         task2/lib/IObserver.h
         task2/lib/CObservable.h
+        task2/lib/CWeatherData.h
 )

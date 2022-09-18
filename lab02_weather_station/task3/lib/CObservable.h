@@ -3,7 +3,7 @@
 
 #include "IObservable.h"
 #include "IObserver.h"
-#include <set>
+#include <map>
 
 // Реализация интерфейса IObservable
 template <class T>
@@ -12,9 +12,18 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
+	static const uint PRIORITY_HIGH   = 400000;
+	static const uint PRIORITY_NORMAL = 300000;
+	static const uint PRIORITY_LOW    = 200000;
+
 	void RegisterObserver(ObserverType& observer) override
 	{
-		m_observers.insert(&observer);
+		RegisterObserver(observer, PRIORITY_NORMAL);
+	}
+
+	void RegisterObserver(ObserverType& observer, uint priority) override
+	{
+		m_observers.insert(std::pair(priority, &observer));
 	}
 
 	void NotifyObservers() override
@@ -22,15 +31,17 @@ public:
 		T data = GetChangedData();
 
 		auto observers = m_observers;
-		for (auto& observer : observers)
+		for (std::pair<uint, ObserverType*> observerData : observers)
 		{
-			observer->Update(data);
+			observerData.second->Update(data);
 		}
 	}
 
 	void RemoveObserver(ObserverType& observer) override
 	{
-		m_observers.erase(&observer);
+		std::erase_if(m_observers, [&observer](std::pair<uint, ObserverType*> pair) {
+			return pair.second == &observer;
+		});
 	}
 
 protected:
@@ -39,7 +50,7 @@ protected:
 	virtual T GetChangedData() const = 0;
 
 private:
-	std::set<ObserverType*> m_observers;
+	std::multimap<uint, ObserverType*, std::greater<uint>> m_observers;
 };
 
 #endif // COBSERVABLE_H

@@ -15,6 +15,8 @@ public:
 
 	virtual void RegisterObserver(IObserver<T>& observer) = 0;
 
+	virtual void RegisterObserver(IObserver<T>& observer, uint priority) = 0;
+
 	virtual void NotifyObservers() = 0;
 
 	virtual void RemoveObserver(IObserver<T>& observer) = 0;

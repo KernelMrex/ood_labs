@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
+#include "../../../catch.hpp"
 #include "../../../task2/lib/CObservable.h"
-#include "../catch.hpp"
 
 TEST_CASE("Self remove from observers works fine", "[c_observable]")
 {

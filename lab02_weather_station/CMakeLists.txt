@@ -34,3 +34,17 @@ add_executable(
         task2/lib/CObservable.h
         task2/lib/CWeatherData.h
 )
+
+
+add_executable(
+        lab02_weather_station_task2_test
+        task2/lib/CStatsDisplay.h
+        task2/lib/Measurement.h
+        task2/lib/CDisplay.h
+        task2/lib/SWeatherInfo.h
+        task2/lib/IObservable.h
+        task2/lib/IObserver.h
+        task2/lib/CObservable.h
+        task2/lib/CWeatherData.h
+        task2_test/unit/lib/CObservableTest.cpp)
+#set_target_properties(lab02_weather_station_task2_test PROPERTIES LINKER_LANGUAGE CXX)

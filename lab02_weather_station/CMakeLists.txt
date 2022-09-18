@@ -47,4 +47,3 @@ add_executable(
         task2/lib/CObservable.h
         task2/lib/CWeatherData.h
         task2_test/unit/lib/CObservableTest.cpp)
-#set_target_properties(lab02_weather_station_task2_test PROPERTIES LINKER_LANGUAGE CXX)

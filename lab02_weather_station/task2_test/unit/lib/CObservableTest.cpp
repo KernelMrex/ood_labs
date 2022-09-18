@@ -8,20 +8,20 @@ TEST_CASE("Self remove from observers works fine", "[c_observable]")
 	{
 	};
 
-	class MockObservable : public CObservable<SMockUpdateData>
+	class CMockObservable : public CObservable<SMockUpdateData>
 	{
 	public:
-		[[nodiscard]] SMockUpdateData GetChangedData() const final
+		SMockUpdateData GetChangedData() const final
 		{
 			SMockUpdateData data;
 			return data;
 		}
 	};
 
-	class MockObserver : public IObserver<SMockUpdateData>
+	class CMockObserver : public IObserver<SMockUpdateData>
 	{
 	public:
-		explicit MockObserver(
+		explicit CMockObserver(
 			CObservable<SMockUpdateData>& currentObservable,
 			int* executedTimes)
 			: m_currentObservable(currentObservable)
@@ -41,11 +41,11 @@ TEST_CASE("Self remove from observers works fine", "[c_observable]")
 	};
 
 	int mutableCounter = 0;
-	MockObservable observable;
-	MockObserver mockObserver1(observable, &mutableCounter);
-	MockObserver mockObserver2(observable, &mutableCounter);
-	MockObserver mockObserver3(observable, &mutableCounter);
-	MockObserver mockObserver4(observable, &mutableCounter);
+	CMockObservable observable;
+	CMockObserver mockObserver1(observable, &mutableCounter);
+	CMockObserver mockObserver2(observable, &mutableCounter);
+	CMockObserver mockObserver3(observable, &mutableCounter);
+	CMockObserver mockObserver4(observable, &mutableCounter);
 
 	observable.RegisterObserver(mockObserver1);
 	observable.RegisterObserver(mockObserver2);

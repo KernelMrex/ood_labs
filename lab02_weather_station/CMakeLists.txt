@@ -38,7 +38,7 @@ add_executable(
 
 add_executable(
         lab02_weather_station_task2_test
-        catch.hpp
+        ../catch.hpp
         task2/lib/IObservable.h
         task2/lib/IObserver.h
         task2/lib/CObservable.h
@@ -60,7 +60,7 @@ add_executable(
 
 add_executable(
         lab02_weather_station_task3_test
-        catch.hpp
+        ../catch.hpp
         task3/lib/IObservable.h
         task3/lib/IObserver.h
         task3/lib/CObservable.h

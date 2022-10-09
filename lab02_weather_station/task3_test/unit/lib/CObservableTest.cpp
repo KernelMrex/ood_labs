@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include "../../../catch.hpp"
+#include "../../../../catch.hpp"
 #include "../../../task3/lib/CObservable.h"
 
 TEST_CASE("CObservable unit tests", "[c_observable]")

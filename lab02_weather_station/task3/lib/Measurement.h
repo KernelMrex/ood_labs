@@ -4,6 +4,7 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 
 template <typename T>
 using PrintMeasurementFn = std::function<void(T newValue)>;

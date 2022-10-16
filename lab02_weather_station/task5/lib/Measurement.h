@@ -1,6 +1,7 @@
 #ifndef MEASUREMENT_H
 #define MEASUREMENT_H
 
+#include <cmath>
 #include <functional>
 #include <iomanip>
 #include <iostream>
@@ -38,6 +39,23 @@ std::function<std::string(T)> GetDefaultMeasurementAccCalcFn()
 		accValue += val;
 
 		ss << std::setprecision(4) << (accValue / counter);
+		return ss.str();
+	};
+}
+
+template <typename T>
+std::function<std::string(T)> GetCircleMeasurementAccCalcFn()
+{
+	double accValue = 0;
+	int counter = 0;
+
+	return [accValue, counter](T val) mutable -> std::string {
+		std::stringstream ss;
+
+		counter++;
+		accValue += val;
+
+		ss << std::setprecision(4) << std::fmod(accValue / counter, 360);
 		return ss.str();
 	};
 }

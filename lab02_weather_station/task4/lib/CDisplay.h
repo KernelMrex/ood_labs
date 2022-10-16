@@ -32,10 +32,12 @@ private:
 
 	void static PrintMeasurementsForWeatherInfo(SWeatherInfo const& data)
 	{
+        std::cout << "--- BEGIN: Simple display ---" << std::endl;
 		std::cout << "From: " << data.sourceId << std::endl;
 		PrintMeasurement("Temp", data.temperature);
 		PrintMeasurement("Hum", data.humidity);
 		PrintMeasurement("Pressure", data.pressure);
+        std::cout << "---  END: Simple display  ---" << std::endl;
 	}
 
 	void static PrintMeasurement(const std::string& label, double value)

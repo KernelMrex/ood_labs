@@ -79,3 +79,14 @@ add_executable(
         task4/lib/CObservable.h
         task4/lib/CWeatherData.h
 )
+
+add_executable(
+        lab02_weather_station_task4_test
+        ../catch.hpp
+        task4/lib/Measurement.h
+        task4/lib/SWeatherInfo.h
+        task4/lib/IObservable.h
+        task4/lib/IObserver.h
+        task4/lib/CObservable.h
+        task4_test/unit/lib/CObservableTest.cpp
+)

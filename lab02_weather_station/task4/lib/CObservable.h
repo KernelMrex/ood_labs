@@ -44,13 +44,27 @@ public:
 		});
 	}
 
+	[[nodiscard]] std::string GetObservableId() const
+	{
+		return m_observableId;
+	}
+
+	CObservable() = delete;
+
 protected:
+	explicit CObservable(std::string observableId)
+		: m_observers(std::multimap<uint, ObserverType*, std::greater<uint>>())
+		, m_observableId(std::move(observableId))
+	{
+	}
+
 	// Классы-наследники должны перегрузить данный метод,
 	// в котором возвращать информацию об изменениях в объекте
 	virtual T GetChangedData() const = 0;
 
 private:
 	std::multimap<uint, ObserverType*, std::greater<uint>> m_observers;
+	std::string m_observableId;
 };
 
 #endif // COBSERVABLE_H

@@ -7,14 +7,9 @@
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
-	CWeatherData(std::string id)
-		: m_weatherDataId(std::move(id))
+	explicit CWeatherData(std::string id)
+		: CObservable(std::move(id))
 	{
-	}
-
-	std::string GetWeatherDataId() const
-	{
-		return m_weatherDataId;
 	}
 
 	// Температура в градусах Цельсия
@@ -50,10 +45,10 @@ public:
 	}
 
 protected:
-	SWeatherInfo GetChangedData() const override
+	[[nodiscard]] SWeatherInfo GetChangedData() const override
 	{
 		SWeatherInfo info{
-			GetWeatherDataId(),
+			GetObservableId(),
 			GetTemperature(),
 			GetHumidity(),
 			GetPressure()

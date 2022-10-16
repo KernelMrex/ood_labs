@@ -25,4 +25,21 @@ PrintMeasurementFn<T> GetMeasurementPrintFn(const std::string& label, std::funct
 	};
 }
 
+template <typename T>
+std::function<std::string(T)> GetDefaultMeasurementAccCalcFn()
+{
+	double accValue = 0;
+	int counter = 0;
+
+	return [accValue, counter](T val) mutable -> std::string {
+		std::stringstream ss;
+
+		counter++;
+		accValue += val;
+
+		ss << std::setprecision(4) << (accValue / counter);
+		return ss.str();
+	};
+}
+
 #endif // MEASUREMENT_H

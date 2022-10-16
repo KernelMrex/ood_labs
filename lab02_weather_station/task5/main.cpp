@@ -10,9 +10,9 @@ int main()
 	wd.RegisterObserver(display);
 
 	CStatsDisplay statsDisplay(
-		GetMeasurementPrintFn<double>("Temperature", GetDefaultAccCalcFn()),
-		GetMeasurementPrintFn<double>("Humidity", GetDefaultAccCalcFn()),
-		GetMeasurementPrintFn<double>("Pressure", GetDefaultAccCalcFn()));
+		GetMeasurementPrintFn<double>("Temperature", GetDefaultMeasurementAccCalcFn<double>()),
+		GetMeasurementPrintFn<double>("Humidity", GetDefaultMeasurementAccCalcFn<double>()),
+		GetMeasurementPrintFn<double>("Pressure", GetDefaultMeasurementAccCalcFn<double>()));
 	wd.RegisterObserver(statsDisplay);
 
 	wd.SetMeasurements(3, 0.7, 760);

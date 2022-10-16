@@ -10,22 +10,6 @@
 template <typename T>
 using PrintMeasurementFn = std::function<void(T newValue)>;
 
-std::function<std::string(double)> GetDefaultAccCalcFn()
-{
-	double accValue = 0;
-	int counter = 0;
-
-	return [accValue, counter](double val) mutable -> std::string {
-		std::stringstream ss;
-
-		counter++;
-		accValue += val;
-
-		ss << std::setprecision(4) << (accValue / counter);
-		return ss.str();
-	};
-}
-
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:

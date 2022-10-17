@@ -10,6 +10,10 @@
 template <typename T>
 using PrintMeasurementFn = std::function<void(T newValue)>;
 
+template <typename T>
+using PrintMeasurementFn = std::function<void(T newValue)>;
+
+
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:

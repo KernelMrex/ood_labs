@@ -10,10 +10,10 @@ int main()
 	wd.RegisterObserver(display);
 
 	CStatsDisplay statsDisplay(
-		GetMeasurementPrintFn<double>("Temperature", GetDefaultMeasurementAccCalcFn<double>()),
-		GetMeasurementPrintFn<double>("Humidity", GetDefaultMeasurementAccCalcFn<double>()),
-		GetMeasurementPrintFn<double>("Pressure", GetDefaultMeasurementAccCalcFn<double>()),
-		GetMeasurementPrintFn<double>("Wind direction", GetCircleMeasurementAccCalcFn<double>()));
+		GetMeasurementPrintFnHOC<double>("Temperature", std::vector{ GetMinMeasurementPrintFn<double>(), GetMaxMeasurementPrintFn<double>(), GetAvgMeasurementPrintFn<double>() }),
+		GetMeasurementPrintFnHOC<double>("Humidity", std::vector{ GetMinMeasurementPrintFn<double>(), GetMaxMeasurementPrintFn<double>(), GetAvgMeasurementPrintFn<double>() }),
+		GetMeasurementPrintFnHOC<double>("Pressure", std::vector{ GetMinMeasurementPrintFn<double>(), GetMaxMeasurementPrintFn<double>(), GetAvgMeasurementPrintFn<double>() }),
+		GetMeasurementPrintFnHOC<double>("Wind direction", std::vector{ GetWindDirectionMeasurementAccCalcFn<double>() }));
 	wd.RegisterObserver(statsDisplay);
 
 	wd.SetMeasurements(3, 0.7, 760, 30);

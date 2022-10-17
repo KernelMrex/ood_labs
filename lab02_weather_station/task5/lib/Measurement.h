@@ -11,51 +11,78 @@ template <typename T>
 using PrintMeasurementFn = std::function<void(T newValue)>;
 
 template <typename T>
-PrintMeasurementFn<T> GetMeasurementPrintFn(const std::string& label, std::function<std::string(T val)> calcAccValueFn)
+PrintMeasurementFn<T> GetMeasurementPrintFnHOC(
+	const std::string& label,
+	const std::vector<std::function<std::string(const std::string&, T)>>& valProcFns)
 {
-	T minValue = std::numeric_limits<T>::infinity();
-	T maxValue = -std::numeric_limits<T>::infinity();
-
-	return [label, calcAccValueFn, minValue, maxValue](T newValue) mutable {
-		minValue = std::min<T>(newValue, minValue);
-		maxValue = std::max<T>(newValue, maxValue);
-
-		std::cout << "Max " << label << " " << std::fixed << std::setprecision(4) << maxValue << std::endl;
-		std::cout << "Min " << label << " " << std::fixed << std::setprecision(4) << minValue << std::endl;
-		std::cout << "Average " << label << " " << calcAccValueFn(newValue) << std::endl;
+	return [label, valProcFns](T newValue) mutable {
+		for (const auto& valProcFn : valProcFns)
+		{
+			std::cout << valProcFn(label, newValue);
+		}
 	};
 }
 
 template <typename T>
-std::function<std::string(T)> GetDefaultMeasurementAccCalcFn()
+std::function<std::string(const std::string& label, T)> GetMinMeasurementPrintFn()
 {
-	double accValue = 0;
-	int counter = 0;
+	T minValue = std::numeric_limits<T>::infinity();
 
-	return [accValue, counter](T val) mutable -> std::string {
+	return [minValue](const std::string& label, T val) mutable -> std::string {
 		std::stringstream ss;
 
-		counter++;
-		accValue += val;
+		minValue = std::min<T>(val, minValue);
 
-		ss << std::setprecision(4) << (accValue / counter);
+		ss << "Min " << label << ": " << std::setprecision(4) << minValue << std::endl;
 		return ss.str();
 	};
 }
 
 template <typename T>
-std::function<std::string(T)> GetCircleMeasurementAccCalcFn()
+std::function<std::string(const std::string& label, T)> GetMaxMeasurementPrintFn()
+{
+	T maxValue = -std::numeric_limits<T>::infinity();
+
+	return [maxValue](const std::string& label, T val) mutable -> std::string {
+		std::stringstream ss;
+
+		maxValue = std::max<T>(val, maxValue);
+
+		ss << "Max " << label << ": " << std::setprecision(4) << maxValue << std::endl;
+		return ss.str();
+	};
+}
+
+template <typename T>
+std::function<std::string(const std::string& label, T)> GetAvgMeasurementPrintFn()
 {
 	double accValue = 0;
 	int counter = 0;
 
-	return [accValue, counter](T val) mutable -> std::string {
+	return [accValue, counter](const std::string& label, T val) mutable -> std::string {
 		std::stringstream ss;
 
 		counter++;
 		accValue += val;
 
-		ss << std::setprecision(4) << std::fmod(accValue / counter, 360);
+		ss << "Average " << label << ": " << std::setprecision(4) << (accValue / counter) << std::endl;
+		return ss.str();
+	};
+}
+
+template <typename T>
+std::function<std::string(const std::string& label, T)> GetWindDirectionMeasurementAccCalcFn()
+{
+	double accValue = 0;
+	int counter = 0;
+
+	return [accValue, counter](const std::string& label, T val) mutable -> std::string {
+		std::stringstream ss;
+
+		counter++;
+		accValue += val;
+
+		ss << "Average " << label << ": " << std::setprecision(4) << std::fmod(accValue / counter, 360) << std::endl;
 		return ss.str();
 	};
 }

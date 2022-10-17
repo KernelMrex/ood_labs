@@ -9,11 +9,12 @@ int main()
 	CDisplay display;
 	wd.RegisterObserver(display);
 
+	// TODO: добавить скорость ветра
 	CStatsDisplay statsDisplay(
 		GetMeasurementPrintFnHOC<double>("Temperature", std::vector{ GetMinMeasurementPrintFn<double>(), GetMaxMeasurementPrintFn<double>(), GetAvgMeasurementPrintFn<double>() }),
 		GetMeasurementPrintFnHOC<double>("Humidity", std::vector{ GetMinMeasurementPrintFn<double>(), GetMaxMeasurementPrintFn<double>(), GetAvgMeasurementPrintFn<double>() }),
 		GetMeasurementPrintFnHOC<double>("Pressure", std::vector{ GetMinMeasurementPrintFn<double>(), GetMaxMeasurementPrintFn<double>(), GetAvgMeasurementPrintFn<double>() }),
-		GetMeasurementPrintFnHOC<double>("Wind direction", std::vector{ GetWindDirectionMeasurementAccCalcFn<double>() }));
+		GetMeasurementPrintFnHOC<double>("Wind direction", std::vector{ GetAvgCircleMeasurementAccCalcFn<double>() }));
 	wd.RegisterObserver(statsDisplay);
 
 	wd.SetMeasurements(3, 0.7, 760, 30);

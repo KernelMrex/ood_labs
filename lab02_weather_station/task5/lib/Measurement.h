@@ -71,7 +71,7 @@ std::function<std::string(const std::string& label, T)> GetAvgMeasurementPrintFn
 }
 
 template <typename T>
-std::function<std::string(const std::string& label, T)> GetWindDirectionMeasurementAccCalcFn()
+std::function<std::string(const std::string& label, T)> GetAvgCircleMeasurementAccCalcFn()
 {
 	double accValue = 0;
 	int counter = 0;
@@ -82,7 +82,8 @@ std::function<std::string(const std::string& label, T)> GetWindDirectionMeasurem
 		counter++;
 		accValue += val;
 
-		ss << "Average " << label << ": " << std::setprecision(4) << std::fmod(accValue / counter, 360) << std::endl;
+		// TODO: переработать суммирование векторов
+		ss << "Average " << label << ": " << std::setprecision(4) << std::fmod(accValue / counter, 180) << std::endl;
 		return ss.str();
 	};
 }

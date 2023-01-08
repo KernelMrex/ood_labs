@@ -1,0 +1,8 @@
+#ifndef LAB04_PAINTER_CRECTANGLE_H
+#define LAB04_PAINTER_CRECTANGLE_H
+
+class CRectangle
+{
+};
+
+#endif // LAB04_PAINTER_CRECTANGLE_H

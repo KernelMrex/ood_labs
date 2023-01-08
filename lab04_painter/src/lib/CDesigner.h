@@ -1,0 +1,8 @@
+#ifndef LAB04_PAINTER_CDESIGNER_H
+#define LAB04_PAINTER_CDESIGNER_H
+
+class CDesigner
+{
+};
+
+#endif // LAB04_PAINTER_CDESIGNER_H

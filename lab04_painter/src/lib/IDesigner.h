@@ -1,0 +1,8 @@
+#ifndef LAB04_PAINTER_IDESIGNER_H
+#define LAB04_PAINTER_IDESIGNER_H
+
+class IDesigner
+{
+};
+
+#endif // LAB04_PAINTER_IDESIGNER_H

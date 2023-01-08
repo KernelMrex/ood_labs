@@ -1,0 +1,8 @@
+#ifndef LAB04_PAINTER_CTRIANGLE_H
+#define LAB04_PAINTER_CTRIANGLE_H
+
+class CTriangle
+{
+};
+
+#endif // LAB04_PAINTER_CTRIANGLE_H

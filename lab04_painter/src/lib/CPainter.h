@@ -1,0 +1,8 @@
+#ifndef LAB04_PAINTER_CPAINTER_H
+#define LAB04_PAINTER_CPAINTER_H
+
+class CPainter
+{
+};
+
+#endif // LAB04_PAINTER_CPAINTER_H

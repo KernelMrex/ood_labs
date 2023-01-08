@@ -1,0 +1,8 @@
+#ifndef LAB04_PAINTER_CSHAPE_H
+#define LAB04_PAINTER_CSHAPE_H
+
+class CShape
+{
+};
+
+#endif // LAB04_PAINTER_CSHAPE_H

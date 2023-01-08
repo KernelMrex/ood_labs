@@ -1,8 +1,14 @@
 #ifndef LAB04_PAINTER_COLOR_H
 #define LAB04_PAINTER_COLOR_H
 
-class Color
+enum class Color : int
 {
+	GREEN = 0x50C878,
+	RED = 0xFF5733,
+	BLUE = 0x3F00FF,
+	YELLOW = 0xFFC000,
+	PINK = 0xF88379,
+	BLACK = 0x000000,
 };
 
 #endif // LAB04_PAINTER_COLOR_H

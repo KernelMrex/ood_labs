@@ -14,11 +14,34 @@ add_executable(
         src/lib/CDesigner.h
         src/lib/Color.h
         src/lib/ICanvas.h
-        src/lib/CCanvas.h
+        src/lib/ConsoleCanvas.h
         src/lib/CShapeFactory.h
         src/lib/CClient.h
         src/lib/CEllipse.h
         src/lib/CRegularPolygon.h
         src/lib/CTriangle.h
         src/lib/CRectangle.h
+        src/lib/Types.h
+)
+
+add_executable(
+        lab04_painter_test
+        src/lib/CPainter.h
+        src/lib/CPictureDraft.h
+        src/lib/CShape.h
+        src/lib/IDesigner.h
+        src/lib/IShapeFactory.h
+        src/lib/CDesigner.h
+        src/lib/Color.h
+        src/lib/ICanvas.h
+        src/lib/ConsoleCanvas.h
+        src/lib/CShapeFactory.h
+        src/lib/CClient.h
+        src/lib/CEllipse.h
+        src/lib/CRegularPolygon.h
+        src/lib/CTriangle.h
+        src/lib/CRectangle.h
+        src/lib/Types.h
+
+        test/lib/unit/ConsoleCanvasTest.cpp
 )

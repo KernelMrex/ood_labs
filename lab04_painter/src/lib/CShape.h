@@ -7,11 +7,6 @@
 class CShape
 {
 public:
-	CShape(Color color)
-		: m_color(color)
-	{
-	}
-
 	virtual void Draw(ICanvas& canvas) = 0;
 
 	Color GetColor()
@@ -20,6 +15,12 @@ public:
 	}
 
 	virtual ~CShape() = default;
+
+protected:
+	explicit CShape(Color color)
+		: m_color(color)
+	{
+	}
 
 private:
 	Color m_color;

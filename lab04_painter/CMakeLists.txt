@@ -54,6 +54,8 @@ add_executable(
         src/lib/Types.h
 
         test/lib/unit/ConsoleCanvasTest.cpp
+        test/lib/unit/mock/MockCanvas.cpp
         test/lib/unit/CRectangleTest.cpp
+        test/lib/unit/CTriangleTest.cpp
 )
 target_link_libraries(lab04_painter_test gtest gtest_main gmock)

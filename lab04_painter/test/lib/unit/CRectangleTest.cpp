@@ -1,19 +1,10 @@
 #include "../../../src/lib/CRectangle.h"
+#include "mock/MockCanvas.cpp"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 using ::testing::Eq;
-
-class MockCanvas : public ICanvas
-{
-public:
-	MOCK_METHOD(void, SetColor, (Color color), (override));
-	MOCK_METHOD(void, Drawline, (const Point2D& from, const Point2D& to), (override));
-	MOCK_METHOD(void, DrawEllipse, (const Point2D& from, int horizontalRadius, int verticalRadius), (override));
-};
-
-MATCHER_P(XAndYAreEqual, point, ""){ return (arg.x == point.x && arg.y == point.y); }
 
 TEST(CRectangleTest, ConstructingTest)
 {

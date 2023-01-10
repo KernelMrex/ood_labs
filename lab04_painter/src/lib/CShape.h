@@ -7,9 +7,10 @@
 class CShape
 {
 public:
-	virtual void Draw(ICanvas& canvas) = 0;
+	virtual void Draw(ICanvas& canvas) const = 0;
 
-	Color GetColor()
+	[[nodiscard]]
+	Color GetColor() const
 	{
 		return m_color;
 	}

@@ -18,7 +18,7 @@ public:
 	{
 	}
 
-	void Draw(ICanvas& canvas) override
+	void Draw(ICanvas& canvas) const override
 	{
 		canvas.SetColor(GetColor());
 		canvas.Drawline(m_vertex1, m_vertex2);

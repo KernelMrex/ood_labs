@@ -57,5 +57,6 @@ add_executable(
         test/lib/unit/mock/MockCanvas.cpp
         test/lib/unit/CRectangleTest.cpp
         test/lib/unit/CTriangleTest.cpp
+        test/lib/unit/CRegularPolygonTest.cpp
 )
 target_link_libraries(lab04_painter_test gtest gtest_main gmock)

@@ -17,7 +17,7 @@ public:
 	{
 	}
 
-	void Draw(ICanvas& canvas) override
+	void Draw(ICanvas& canvas) const override
 	{
 		Point2D rightTop{ .x = m_rightBottom.x, .y = m_leftTop.y};
 		Point2D leftBottom{ .x = m_leftTop.x, .y = m_rightBottom.y};

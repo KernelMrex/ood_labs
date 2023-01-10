@@ -10,8 +10,6 @@ TEST(CRectangleTest, ConstructingTest)
 {
 	CRectangle rect(Color::RED, { .x = 1, .y = 2 }, { .x = 7, .y = 8 });
 
-	MockCanvas canvas;
-
 	ASSERT_EQ(rect.GetColor(), Color::RED);
 	ASSERT_THAT(rect.GetLeftTop(), XAndYAreEqual(Point2D{ .x = 1, .y = 2 }));
 	ASSERT_THAT(rect.GetRightBottom(), XAndYAreEqual(Point2D{ .x = 7, .y = 8 }));

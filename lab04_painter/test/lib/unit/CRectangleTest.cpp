@@ -1,5 +1,6 @@
 #include "../../../src/lib/CRectangle.h"
 #include "mock/MockCanvas.cpp"
+#include "matcher/MatchersPoint2D.cpp"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

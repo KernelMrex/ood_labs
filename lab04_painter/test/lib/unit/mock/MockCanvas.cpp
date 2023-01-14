@@ -10,5 +10,3 @@ public:
 	MOCK_METHOD(void, Drawline, (const Point2D& from, const Point2D& to), (override));
 	MOCK_METHOD(void, DrawEllipse, (const Point2D& from, int horizontalRadius, int verticalRadius), (override));
 };
-
-MATCHER_P(XAndYAreEqual, point, ""){ return (arg.x == point.x && arg.y == point.y); }

@@ -29,12 +29,11 @@ TEST(CRegularPolygonTest, DrawTest)
 	polygon.Draw(canvas);
 }
 
-// TODO: calculate example
-//TEST(CRegularPolygonTest, GetCenterOfGravity)
-//{
-//	CRegularPolygon polygon(Color::YELLOW, { { 1, 1 }, { 2, 4 }, { 5, 5 }, { 6, 3 }, { 4, 1 } });
-//
-//	auto centerOfGravity = polygon.GetCenter();
-//	ASSERT_EQ(centerOfGravity.x, 3.6);
-//	ASSERT_EQ(centerOfGravity.y, 3.0);
-//}
+TEST(CRegularPolygonTest, GetCenterOfGravity)
+{
+	CRegularPolygon polygon(Color::YELLOW, { { 1, 1 }, { 2, 4 }, { 5, 5 }, { 6, 3 }, { 4, 1 } });
+
+	auto centerOfGravity = polygon.GetCenter();
+	EXPECT_NEAR(centerOfGravity.x, 3.513, 0.001);
+	EXPECT_NEAR(centerOfGravity.y, 2.795, 0.001);
+}

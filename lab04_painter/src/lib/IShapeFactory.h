@@ -10,6 +10,8 @@ class IShapeFactory
 public:
 	[[nodiscard]]
 	virtual std::unique_ptr<CShape> CreateShape(const std::string& description) const = 0;
+
+	virtual ~IShapeFactory() = default;
 };
 
 #endif // LAB04_PAINTER_ISHAPEFACTORY_H

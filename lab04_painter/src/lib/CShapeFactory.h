@@ -3,6 +3,7 @@
 
 #include "CRectangle.h"
 #include "CRegularPolygon.h"
+#include "CTriangle.h"
 #include "IShapeFactory.h"
 #include <regex>
 
@@ -70,6 +71,25 @@ private:
 		return std::make_unique<CRegularPolygon>(color, vertices);
 	}
 
+	static std::unique_ptr<CShape> CreateTriangle(const std::string& description)
+	{
+		std::regex regex(R"(^(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s([a-z]+)$)");
+		std::smatch match;
+
+		if (!std::regex_match(description, match, regex))
+		{
+			throw std::invalid_argument("invalid polygon description");
+		}
+
+		Color color = ParseColor(match[7]);
+
+		Point2D vertex1 = { .x = std::stod(match[1]), .y = std::stod(match[2])};
+		Point2D vertex2 = { .x = std::stod(match[3]), .y = std::stod(match[4])};
+		Point2D vertex3 = { .x = std::stod(match[5]), .y = std::stod(match[6])};
+
+		return std::make_unique<CTriangle>(color, vertex1, vertex2, vertex3);
+	}
+
 	static Color ParseColor(const std::string& raw)
 	{
 		auto it = m_colorMapping.find(raw);
@@ -110,7 +130,8 @@ private:
 
 	inline static std::map<std::string, std::function<std::unique_ptr<CShape>(const std::string&)>> m_shapeHandler{
 		{ "rectangle", CreateRect },
-		{ "polygon", CreatePolygon }
+		{ "polygon", CreatePolygon },
+		{ "triangle", CreateTriangle }
 	};
 };
 

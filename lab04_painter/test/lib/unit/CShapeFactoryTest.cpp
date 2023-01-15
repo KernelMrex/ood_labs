@@ -43,3 +43,24 @@ TEST(CShapeFactoryTest, PolygonCreationTest)
 		EXPECT_NEAR(centerOfGravity.y, 2.795, 0.001);
 	});
 }
+
+// Grammar: triangle <double1> <double1> <double2> <double2> <double2> <double2> <string>
+TEST(CShapeFactoryTest, TriangleCreationTest)
+{
+	CShapeFactory shapeFactory;
+
+	ASSERT_NO_THROW({
+		auto shape = shapeFactory.CreateShape("triangle 1.0 2.0 7.0 8.0 10.0 12.0 pink");
+
+		auto pRect = dynamic_cast<CTriangle*>(shape.get());
+		ASSERT_NE(pRect, nullptr);
+
+		std::unique_ptr<CTriangle> triangle(dynamic_cast<CTriangle*>(shape.release()));
+
+		ASSERT_EQ(triangle->GetColor(), Color::PINK);
+
+		ASSERT_THAT(triangle->GetVertex1(), XAndYAreEqual(Point2D{ .x = 1, .y = 2 }));
+		ASSERT_THAT(triangle->GetVertex2(), XAndYAreEqual(Point2D{ .x = 7, .y = 8 }));
+		ASSERT_THAT(triangle->GetVertex3(), XAndYAreEqual(Point2D{ .x = 10, .y = 12 }));
+	});
+}

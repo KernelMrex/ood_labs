@@ -58,7 +58,9 @@ add_executable(
         test/lib/unit/CRectangleTest.cpp
         test/lib/unit/CTriangleTest.cpp
         test/lib/unit/CRegularPolygonTest.cpp
+        test/lib/unit/CEllipseTest.cpp
         test/lib/unit/CShapeFactoryTest.cpp
         test/lib/unit/matcher/MatchersPoint2D.cpp
 )
+
 target_link_libraries(lab04_painter_test gtest gtest_main gmock)

@@ -25,7 +25,7 @@ public:
 		m_ostream << "line from (" << from.x << ", " << from.y << ") to (" << to.x << ", " << to.y << ") with #" << fmtColorToHex(m_color) << std::endl;
 	}
 
-	void DrawEllipse(const Point2D& center, int horizontalRadius, int verticalRadius) override
+	void DrawEllipse(const Point2D& center, double horizontalRadius, double verticalRadius) override
 	{
 		m_ostream << "ellipse center (" << center.x << ", " << center.y << ") with hr: " << horizontalRadius << ", vr: " << verticalRadius << " with #" << fmtColorToHex(m_color) << std::endl;
 	}

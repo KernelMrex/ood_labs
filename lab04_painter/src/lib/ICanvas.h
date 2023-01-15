@@ -11,7 +11,7 @@ public:
 
 	virtual void Drawline(const Point2D& from, const Point2D& to) = 0;
 
-	virtual void DrawEllipse(const Point2D& from, int horizontalRadius, int verticalRadius) = 0;
+	virtual void DrawEllipse(const Point2D& from, double horizontalRadius, double verticalRadius) = 0;
 };
 
 #endif // LAB04_PAINTER_ICANVAS_H

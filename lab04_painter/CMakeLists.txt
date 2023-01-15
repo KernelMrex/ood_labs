@@ -56,6 +56,7 @@ add_executable(
         test/lib/unit/matcher/MatchersPoint2D.cpp
         test/lib/unit/mock/MockShape.cpp
         test/lib/unit/mock/MockCanvas.cpp
+        test/lib/unit/mock/MockShapeFactory.cpp
         test/lib/unit/ConsoleCanvasTest.cpp
         test/lib/unit/CRectangleTest.cpp
         test/lib/unit/CTriangleTest.cpp
@@ -64,7 +65,7 @@ add_executable(
         test/lib/unit/CShapeFactoryTest.cpp
         test/lib/unit/CPictureDraftTest.cpp
         test/lib/unit/CDesignerTest.cpp
-        test/lib/unit/mock/MockShapeFactory.cpp
+        test/lib/unit/CPainterTest.cpp
 )
 
 target_link_libraries(lab04_painter_test gtest gtest_main gmock)

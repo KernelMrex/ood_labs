@@ -19,6 +19,10 @@ public:
 		std::string line;
 		while (std::getline(in, line))
 		{
+			if (line.empty())
+			{
+				break;
+			}
 			shapes.push_back(m_shapeFactory->CreateShape(line));
 		}
 

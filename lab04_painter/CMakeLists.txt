@@ -26,7 +26,6 @@ add_executable(
         src/lib/ICanvas.h
         src/lib/ConsoleCanvas.h
         src/lib/CShapeFactory.h
-        src/lib/CClient.h
         src/lib/CEllipse.h
         src/lib/CRegularPolygon.h
         src/lib/CTriangle.h
@@ -46,7 +45,6 @@ add_executable(
         src/lib/ICanvas.h
         src/lib/ConsoleCanvas.h
         src/lib/CShapeFactory.h
-        src/lib/CClient.h
         src/lib/CEllipse.h
         src/lib/CRegularPolygon.h
         src/lib/CTriangle.h

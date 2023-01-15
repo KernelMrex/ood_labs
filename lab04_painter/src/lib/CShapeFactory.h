@@ -32,7 +32,7 @@ public:
 private:
 	static std::unique_ptr<CShape> CreateRect(const std::string& description)
 	{
-		std::regex regex(R"(^(\d\.\d)\s(\d\.\d)\s(\d\.\d)\s(\d\.\d)\s([a-z]+)$)");
+		std::regex regex(R"(^(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s([a-z]+)$)");
 		std::smatch match;
 
 		if (!std::regex_match(description, match, regex))

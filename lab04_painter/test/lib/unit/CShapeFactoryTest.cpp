@@ -10,7 +10,7 @@ TEST(CShapeFactoryTest, RectangleCreationTest)
 	CShapeFactory shapeFactory;
 
 	ASSERT_NO_THROW({
-		auto shape = shapeFactory.CreateShape("rectangle 1.0 2.0 7.0 8.0 red");
+		auto shape = shapeFactory.CreateShape("rectangle 1.0 2.0 7.0 81.12 red");
 
 		auto pRect = dynamic_cast<CRectangle*>(shape.get());
 		ASSERT_NE(pRect, nullptr);
@@ -18,8 +18,8 @@ TEST(CShapeFactoryTest, RectangleCreationTest)
 		std::unique_ptr<CRectangle> rectangle(dynamic_cast<CRectangle*>(shape.release()));
 
 		ASSERT_EQ(rectangle->GetColor(), Color::RED);
-		ASSERT_THAT(rectangle->GetLeftTop(), XAndYAreEqual(Point2D{1.0, 2.0}));
-		ASSERT_THAT(rectangle->GetRightBottom(), XAndYAreEqual(Point2D{7.0, 8.0}));
+		ASSERT_THAT(rectangle->GetLeftTop(), XAndYAreEqual(Point2D{ 1.0, 2.0 }));
+		ASSERT_THAT(rectangle->GetRightBottom(), XAndYAreEqual(Point2D{ 7.0, 81.12 }));
 	});
 }
 

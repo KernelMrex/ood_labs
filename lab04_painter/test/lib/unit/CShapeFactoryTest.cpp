@@ -64,3 +64,24 @@ TEST(CShapeFactoryTest, TriangleCreationTest)
 		ASSERT_THAT(triangle->GetVertex3(), XAndYAreEqual(Point2D{ .x = 10, .y = 12 }));
 	});
 }
+
+// Grammar: ellipse <double1> <double1> <double3> <double4> <string>
+TEST(CShapeFactoryTest, EllipseCreationTest)
+{
+	CShapeFactory shapeFactory;
+
+	ASSERT_NO_THROW({
+		auto shape = shapeFactory.CreateShape("ellipse 1.0 2.0 7.0 8.0 green");
+
+		auto pRect = dynamic_cast<CEllipse*>(shape.get());
+		ASSERT_NE(pRect, nullptr);
+
+		std::unique_ptr<CEllipse> ellipse(dynamic_cast<CEllipse*>(shape.release()));
+
+		ASSERT_EQ(ellipse->GetColor(), Color::GREEN);
+
+		ASSERT_THAT(ellipse->GetCenter(), XAndYAreEqual(Point2D{ .x = 1, .y = 2 }));
+		ASSERT_EQ(ellipse->GetVerticalRadius(), 7.0);
+		ASSERT_EQ(ellipse->GetHorizontalRadius(), 8.0);
+	});
+}

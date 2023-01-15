@@ -1,6 +1,7 @@
 #ifndef LAB04_PAINTER_CSHAPEFACTORY_H
 #define LAB04_PAINTER_CSHAPEFACTORY_H
 
+#include "CEllipse.h"
 #include "CRectangle.h"
 #include "CRegularPolygon.h"
 #include "CTriangle.h"
@@ -90,6 +91,24 @@ private:
 		return std::make_unique<CTriangle>(color, vertex1, vertex2, vertex3);
 	}
 
+	static std::unique_ptr<CShape> CreateEllipse(const std::string& description)
+	{
+		std::regex regex(R"(^(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s([a-z]+)$)");
+		std::smatch match;
+
+		if (!std::regex_match(description, match, regex))
+		{
+			throw std::invalid_argument("invalid ellipse description");
+		}
+
+		Color color = ParseColor(match[5]);
+		Point2D center = { .x = std::stod(match[1]), .y = std::stod(match[2])};
+		double horizontalRadius = std::stod(match[3]);
+		double verticalRadius = std::stod(match[4]);
+
+		return std::make_unique<CEllipse>(color, center, horizontalRadius, verticalRadius);
+	}
+
 	static Color ParseColor(const std::string& raw)
 	{
 		auto it = m_colorMapping.find(raw);
@@ -131,7 +150,8 @@ private:
 	inline static std::map<std::string, std::function<std::unique_ptr<CShape>(const std::string&)>> m_shapeHandler{
 		{ "rectangle", CreateRect },
 		{ "polygon", CreatePolygon },
-		{ "triangle", CreateTriangle }
+		{ "triangle", CreateTriangle },
+		{ "ellipse", CreateEllipse },
 	};
 };
 

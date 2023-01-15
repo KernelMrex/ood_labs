@@ -3,11 +3,15 @@
 
 #include "Color.h"
 #include "ICanvas.h"
+#include <memory>
 
 class CShape
 {
 public:
 	virtual void Draw(ICanvas& canvas) const = 0;
+
+	[[nodiscard]]
+	virtual std::unique_ptr<CShape> Clone() const = 0;
 
 	[[nodiscard]]
 	Color GetColor() const

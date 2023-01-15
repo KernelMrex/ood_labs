@@ -61,6 +61,6 @@ add_executable(
         test/lib/unit/CEllipseTest.cpp
         test/lib/unit/CShapeFactoryTest.cpp
         test/lib/unit/matcher/MatchersPoint2D.cpp
-)
+        test/lib/unit/CPictureDraftTest.cpp test/lib/unit/mock/MockShape.cpp)
 
 target_link_libraries(lab04_painter_test gtest gtest_main gmock)

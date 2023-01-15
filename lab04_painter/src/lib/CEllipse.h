@@ -25,6 +25,12 @@ public:
 	}
 
 	[[nodiscard]]
+	std::unique_ptr<CShape> Clone() const override
+	{
+		return std::make_unique<CEllipse>(GetColor(), m_center, m_verticalRadius, m_horizontalRadius);
+	}
+
+	[[nodiscard]]
 	Point2D GetCenter() const
 	{
 		return m_center;

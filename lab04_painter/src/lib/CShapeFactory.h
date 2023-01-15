@@ -2,6 +2,7 @@
 #define LAB04_PAINTER_CSHAPEFACTORY_H
 
 #include "CRectangle.h"
+#include "CRegularPolygon.h"
 #include "IShapeFactory.h"
 #include <regex>
 
@@ -48,13 +49,54 @@ private:
 			.y = std::stod(match[4]),
 		};
 
-		auto it = m_colorMapping.find(match[5]);
+		Color color = ParseColor(match[5]);
+
+		return std::make_unique<CRectangle>(color, leftTop, rightBottom);
+	}
+
+	static std::unique_ptr<CShape> CreatePolygon(const std::string& description)
+	{
+		std::regex regex(R"(^((?:\d+\.\d+\s\d+\.\d+\s)+)([a-z]+)$)");
+		std::smatch match;
+
+		if (!std::regex_match(description, match, regex))
+		{
+			throw std::invalid_argument("invalid polygon description");
+		}
+
+		Color color = ParseColor(match[2]);
+		std::vector<Point2D> vertices = ParseVertices(match[1]);
+
+		return std::make_unique<CRegularPolygon>(color, vertices);
+	}
+
+	static Color ParseColor(const std::string& raw)
+	{
+		auto it = m_colorMapping.find(raw);
 		if (it == m_colorMapping.end())
 		{
 			throw std::invalid_argument("invalid color name in rectangle description");
 		}
+		return it->second;
+	}
 
-		return std::make_unique<CRectangle>(it->second, leftTop, rightBottom);
+	static std::vector<Point2D> ParseVertices(std::string raw)
+	{
+		std::regex regex(R"((?:(\d+\.\d+)\s(\d+\.\d+))\s?)");
+		std::smatch match;
+
+		std::vector<Point2D> vertices;
+		while (std::regex_search(raw, match, regex))
+		{
+			vertices.emplace_back(Point2D{
+				.x = std::stod(match[1]),
+				.y = std::stod(match[2])
+			});
+
+			raw = match.suffix();
+		}
+
+		return vertices;
 	}
 
 	inline static std::map<std::string, Color> m_colorMapping{
@@ -68,6 +110,7 @@ private:
 
 	inline static std::map<std::string, std::function<std::unique_ptr<CShape>(const std::string&)>> m_shapeHandler{
 		{ "rectangle", CreateRect },
+		{ "polygon", CreatePolygon }
 	};
 };
 

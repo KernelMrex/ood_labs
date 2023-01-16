@@ -16,7 +16,7 @@ TEST(CPictureDraftTest, StoringValuesTest)
 //	std::shared_ptr<MockShape> shape1;
 //	ON_CALL(*shape1, Clone()).WillByDefault(Return(ByMove(std::make_unique<MockShape>())));
 //	EXPECT_CALL(*shape1, Clone()).Times(1);
-
+//
 //	std::shared_ptr<MockShape> shape2;
 //	EXPECT_CALL((*shape2), Clone())
 //		.WillRepeatedly(Return(ByMove(std::make_unique<MockShape>())))

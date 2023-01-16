@@ -121,6 +121,7 @@ private:
 
 	static std::vector<Point2D> ParseVertices(std::string raw)
 	{
+		// TODO: знак не обрабатывается
 		std::regex regex(R"((?:(\d+\.\d+)\s(\d+\.\d+))\s?)");
 		std::smatch match;
 

@@ -13,7 +13,7 @@ public:
 	{
 		for (const auto& shape : shapes)
 		{
-			m_shapes.push_back(std::move(shape->Clone()));
+			m_shapes.push_back(shape->Clone());
 		}
 	}
 
@@ -26,6 +26,7 @@ public:
 	[[nodiscard]]
 	std::unique_ptr<CShape> GetShape(std::size_t index) const
 	{
+		// TODO: вернуть константную ссылку
 		if (index >= m_shapes.size())
 		{
 			return nullptr;
@@ -35,6 +36,7 @@ public:
 	}
 
 private:
+	// TODO: переделать на shared_ptr
 	std::vector<std::unique_ptr<CShape>> m_shapes;
 };
 

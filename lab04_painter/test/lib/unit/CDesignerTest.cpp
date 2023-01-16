@@ -16,7 +16,6 @@ TEST(CDesinerTest, CreatingDraftsTest)
 
 	auto mockShape1 = std::make_unique<NiceMock<MockShape>>();
 	ON_CALL(*mockShape1, Clone).WillByDefault(Return(ByMove(std::make_unique<MockShape>())));
-	ON_CALL(*mockShape1, Clone).WillByDefault(Return(ByMove(std::make_unique<MockShape>())));
 
 	auto mockShape2 = std::make_unique<NiceMock<MockShape>>();
 	ON_CALL(*mockShape2, Clone).WillByDefault(Return(ByMove(std::make_unique<MockShape>())));

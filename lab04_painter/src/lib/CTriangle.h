@@ -26,12 +26,6 @@ public:
 		canvas.Drawline(m_vertex3, m_vertex1);
 	}
 
-	[[nodiscard]]
-	std::unique_ptr<CShape> Clone() const override
-	{
-		return std::make_unique<CTriangle>(GetColor(), m_vertex1, m_vertex2, m_vertex3);
-	}
-
 	[[nodiscard]] Point2D GetVertex1() const
 	{
 		return m_vertex1;

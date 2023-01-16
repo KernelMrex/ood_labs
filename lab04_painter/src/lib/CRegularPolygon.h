@@ -25,12 +25,6 @@ public:
 	}
 
 	[[nodiscard]]
-	std::unique_ptr<CShape> Clone() const override
-	{
-		return std::make_unique<CRegularPolygon>(GetColor(), m_vertices);
-	}
-
-	[[nodiscard]]
 	unsigned int GetVertexCount() const
 	{
 		return m_vertices.size();

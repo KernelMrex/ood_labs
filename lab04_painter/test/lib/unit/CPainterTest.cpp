@@ -13,22 +13,12 @@ TEST(CPainterTest, EachFigureMustBeDrawnTest)
 {
 	MockCanvas canvas;
 
-	auto innerInnerShape1 = std::make_unique<MockShape>();
-	EXPECT_CALL(*innerInnerShape1, Draw(::testing::_)).Times(1);
-	auto innerShape1 = std::make_unique<NiceMock<MockShape>>();
-	ON_CALL(*innerShape1, Clone).WillByDefault(Return(ByMove(std::move(innerInnerShape1))));
 	auto shape1 = std::make_shared<NiceMock<MockShape>>();
-	ON_CALL(*shape1, Clone).WillByDefault(Return(ByMove(std::move(innerShape1))));
-
-	auto innerInnerShape2 = std::make_unique<MockShape>();
-	EXPECT_CALL(*innerInnerShape2, Draw(::testing::_)).Times(1);
-	auto innerShape2 = std::make_unique<NiceMock<MockShape>>();
-	ON_CALL(*innerShape2, Clone).WillByDefault(Return(ByMove(std::move(innerInnerShape2))));
+	EXPECT_CALL(*shape1, Draw(::testing::_)).Times(1);
 	auto shape2 = std::make_shared<NiceMock<MockShape>>();
-	ON_CALL(*shape2, Clone).WillByDefault(Return(ByMove(std::move(innerShape2))));
+	EXPECT_CALL(*shape2, Draw(::testing::_)).Times(1);
 
 	std::vector<std::shared_ptr<CShape>> shapes;
-
 	shapes.push_back(shape1);
 	shapes.push_back(shape2);
 

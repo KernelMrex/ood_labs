@@ -8,25 +8,18 @@
 using ::testing::Return;
 using ::testing::InSequence;
 using ::testing::ByMove;
-using ::testing::NiceMock;
 
 TEST(CDesinerTest, CreatingDraftsTest)
 {
 	InSequence s;
 
-	auto mockShape1 = std::make_unique<NiceMock<MockShape>>();
-	ON_CALL(*mockShape1, Clone).WillByDefault(Return(ByMove(std::make_unique<MockShape>())));
-
-	auto mockShape2 = std::make_unique<NiceMock<MockShape>>();
-	ON_CALL(*mockShape2, Clone).WillByDefault(Return(ByMove(std::make_unique<MockShape>())));
-
 	auto mockShapeFactory = std::make_unique<MockShapeFactory>();
-	EXPECT_CALL(*mockShapeFactory, CreateShape(::testing::_))
+	EXPECT_CALL(*mockShapeFactory, CreateShape("some notation here 1"))
 		.Times(1)
-		.WillRepeatedly(Return(ByMove(std::move(mockShape1))));
-	EXPECT_CALL(*mockShapeFactory, CreateShape(::testing::_))
+		.WillRepeatedly(Return(ByMove(std::make_unique<MockShape>())));
+	EXPECT_CALL(*mockShapeFactory, CreateShape("some notation here 2"))
 		.Times(1)
-		.WillRepeatedly(Return(ByMove(std::move(mockShape2))));
+		.WillRepeatedly(Return(ByMove(std::make_unique<MockShape>())));
 
 	CDesigner designer(std::move(mockShapeFactory));
 

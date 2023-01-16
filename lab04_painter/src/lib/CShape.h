@@ -11,9 +11,6 @@ public:
 	virtual void Draw(ICanvas& canvas) const = 0;
 
 	[[nodiscard]]
-	virtual std::unique_ptr<CShape> Clone() const = 0;
-
-	[[nodiscard]]
 	Color GetColor() const
 	{
 		return m_color;

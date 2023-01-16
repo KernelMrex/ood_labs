@@ -10,5 +10,4 @@ public:
 		: CShape(Color::RED){};
 
 	MOCK_METHOD(void, Draw, (ICanvas & canvas), (const, override));
-	MOCK_METHOD(std::unique_ptr<CShape>, Clone, (), (const, override));
 };

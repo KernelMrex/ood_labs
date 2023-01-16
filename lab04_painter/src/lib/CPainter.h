@@ -11,7 +11,7 @@ public:
 	{
 		for (std::size_t i = 0; i < draft.GetShapeCount(); i++)
 		{
-			draft.GetShape(i)->Draw(canvas);
+			draft.GetShape(i).Draw(canvas);
 		}
 	}
 };

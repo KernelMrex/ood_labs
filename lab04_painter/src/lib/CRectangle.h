@@ -29,12 +29,6 @@ public:
 		canvas.Drawline(leftBottom, m_leftTop);
 	}
 
-	[[nodiscard]]
-	std::unique_ptr<CShape> Clone() const override
-	{
-		return std::make_unique<CRectangle>(GetColor(), m_leftTop, m_rightBottom);
-	}
-
 	[[nodiscard]] Point2D GetLeftTop() const
 	{
 		return m_leftTop;

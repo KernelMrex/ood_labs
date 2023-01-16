@@ -9,13 +9,8 @@ class CPictureDraft
 {
 public:
 	explicit CPictureDraft(const std::vector<std::shared_ptr<CShape>>& shapes)
-		: m_shapes(std::vector<std::unique_ptr<CShape>>())
-	{
-		for (const auto& shape : shapes)
-		{
-			m_shapes.push_back(shape->Clone());
-		}
-	}
+		: m_shapes(shapes)
+	{}
 
 	[[nodiscard]]
 	std::size_t GetShapeCount() const
@@ -24,20 +19,13 @@ public:
 	}
 
 	[[nodiscard]]
-	std::unique_ptr<CShape> GetShape(std::size_t index) const
+	const CShape& GetShape(std::size_t index) const
 	{
-		// TODO: вернуть константную ссылку
-		if (index >= m_shapes.size())
-		{
-			return nullptr;
-		}
-
-		return m_shapes[index]->Clone();
+		return *m_shapes[index];
 	}
 
 private:
-	// TODO: переделать на shared_ptr
-	std::vector<std::unique_ptr<CShape>> m_shapes;
+	std::vector<std::shared_ptr<CShape>> m_shapes;
 };
 
 #endif // LAB04_PAINTER_CPICTUREDRAFT_H

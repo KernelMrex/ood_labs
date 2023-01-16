@@ -4,13 +4,13 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-// Grammar: rectangle <double> <double> <double> <double> <string>
+// Grammar: rectangle <color> <p1.x> <p1.y> <p2.x> <p2.y>
 TEST(CShapeFactoryTest, RectangleCreationTest)
 {
 	CShapeFactory shapeFactory;
 
 	ASSERT_NO_THROW({
-		auto shape = shapeFactory.CreateShape("rectangle 1.0 2.0 7.0 81.12 red");
+		auto shape = shapeFactory.CreateShape("rectangle red 1.0 2.0 7.0 81.12");
 
 		auto pRect = dynamic_cast<CRectangle*>(shape.get());
 		ASSERT_NE(pRect, nullptr);
@@ -23,13 +23,13 @@ TEST(CShapeFactoryTest, RectangleCreationTest)
 	});
 }
 
-// Grammar: polygon <double1> <double1> <doubleN> <doubleN> <string>
+// Grammar: polygon <color> <p1.x> <p1.y> ... <pN.x> <pN.y>
 TEST(CShapeFactoryTest, PolygonCreationTest)
 {
 	CShapeFactory shapeFactory;
 
 	ASSERT_NO_THROW({
-		auto shape = shapeFactory.CreateShape("polygon 1.0 1.0 2.0 4.0 5.0 5.0 6.0 3.0 4.0 1.0 blue");
+		auto shape = shapeFactory.CreateShape("polygon blue 1.0 1.0 2.0 4.0 5.0 5.0 6.0 3.0 4.0 1.0");
 
 		auto pRect = dynamic_cast<CRegularPolygon*>(shape.get());
 		ASSERT_NE(pRect, nullptr);
@@ -44,13 +44,13 @@ TEST(CShapeFactoryTest, PolygonCreationTest)
 	});
 }
 
-// Grammar: triangle <double1> <double1> <double2> <double2> <double2> <double2> <string>
+// Grammar: triangle <color> <p1.x> <p1.y> <p2.x> <p2.y> <p3.x> <p3.y>
 TEST(CShapeFactoryTest, TriangleCreationTest)
 {
 	CShapeFactory shapeFactory;
 
 	ASSERT_NO_THROW({
-		auto shape = shapeFactory.CreateShape("triangle 1.0 2.0 7.0 8.0 10.0 12.0 pink");
+		auto shape = shapeFactory.CreateShape("triangle pink 1.0 2.0 7.0 8.0 10.0 12.0");
 
 		auto pRect = dynamic_cast<CTriangle*>(shape.get());
 		ASSERT_NE(pRect, nullptr);
@@ -65,13 +65,13 @@ TEST(CShapeFactoryTest, TriangleCreationTest)
 	});
 }
 
-// Grammar: ellipse <double1> <double1> <double3> <double4> <string>
+// Grammar: ellipse <color> <center.x> <center.y> <vr> <hr>
 TEST(CShapeFactoryTest, EllipseCreationTest)
 {
 	CShapeFactory shapeFactory;
 
 	ASSERT_NO_THROW({
-		auto shape = shapeFactory.CreateShape("ellipse 1.0 2.0 7.0 8.0 green");
+		auto shape = shapeFactory.CreateShape("ellipse green 1.0 2.0 7.0 8.0");
 
 		auto pRect = dynamic_cast<CEllipse*>(shape.get());
 		ASSERT_NE(pRect, nullptr);

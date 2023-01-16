@@ -11,102 +11,87 @@
 class CShapeFactory : public IShapeFactory
 {
 public:
-	[[nodiscard]] std::unique_ptr<CShape> CreateShape(const std::string& description) const override
+	[[nodiscard]]
+	std::unique_ptr<CShape> CreateShape(const std::string& description) const override
 	{
-		std::regex regex(R"(^([a-z_]+)\s(.*)$)");
-		std::smatch match;
+		std::string shapeType;
+		std::istringstream iss(description);
 
-		if (!std::regex_match(description, match, regex))
-		{
-			throw std::invalid_argument("invalid shape description");
-		}
+		iss >> shapeType;
 
-		auto handler = m_shapeHandler.find(match[1]);
+		auto handler = m_shapeHandler.find(shapeType);
 		if (handler == m_shapeHandler.end())
 		{
 			throw std::invalid_argument("invalid type in shape description");
 		}
 
-		return handler->second(match[2]);
+		std::ostringstream oss;
+		oss << iss.rdbuf();
+
+		return handler->second(oss.str());
 	}
 
 private:
 	static std::unique_ptr<CShape> CreateRect(const std::string& description)
 	{
-		std::regex regex(R"(^(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s([a-z]+)$)");
-		std::smatch match;
+		std::istringstream iss(description);
 
-		if (!std::regex_match(description, match, regex))
-		{
-			throw std::invalid_argument("invalid rectangle description");
-		}
+		std::string colorWord;
+		Point2D leftTop{};
+		Point2D rightBottom{};
 
-		Point2D leftTop = {
-			.x = std::stod(match[1]),
-			.y = std::stod(match[2]),
-		};
+		iss >> colorWord >> leftTop.x >> leftTop.y >> rightBottom.x >> rightBottom.y;
 
-		Point2D rightBottom = {
-			.x = std::stod(match[3]),
-			.y = std::stod(match[4]),
-		};
-
-		Color color = ParseColor(match[5]);
-
-		return std::make_unique<CRectangle>(color, leftTop, rightBottom);
+		return std::make_unique<CRectangle>(ParseColor(colorWord), leftTop, rightBottom);
 	}
 
 	static std::unique_ptr<CShape> CreatePolygon(const std::string& description)
 	{
-		std::regex regex(R"(^((?:\d+\.\d+\s\d+\.\d+\s)+)([a-z]+)$)");
-		std::smatch match;
+		std::istringstream iss(description);
 
-		if (!std::regex_match(description, match, regex))
+		std::string colorWord;
+		iss >> colorWord;
+
+		std::vector<Point2D> vertices;
+		while (!iss.eof() && iss.good())
 		{
-			throw std::invalid_argument("invalid polygon description");
+			Point2D vertex{};
+			iss >> vertex.x >> vertex.y;
+			vertices.push_back(vertex);
 		}
 
-		Color color = ParseColor(match[2]);
-		std::vector<Point2D> vertices = ParseVertices(match[1]);
-
-		return std::make_unique<CRegularPolygon>(color, vertices);
+		return std::make_unique<CRegularPolygon>(ParseColor(colorWord), vertices);
 	}
 
 	static std::unique_ptr<CShape> CreateTriangle(const std::string& description)
 	{
-		std::regex regex(R"(^(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s([a-z]+)$)");
-		std::smatch match;
+		std::istringstream iss(description);
 
-		if (!std::regex_match(description, match, regex))
-		{
-			throw std::invalid_argument("invalid polygon description");
-		}
+		std::string colorWord;
+		Point2D vertex1{};
+		Point2D vertex2{};
+		Point2D vertex3{};
 
-		Color color = ParseColor(match[7]);
+		iss >> colorWord
+			>> vertex1.x >> vertex1.y
+			>> vertex2.x >> vertex2.y
+			>> vertex3.x >> vertex3.y;
 
-		Point2D vertex1 = { .x = std::stod(match[1]), .y = std::stod(match[2])};
-		Point2D vertex2 = { .x = std::stod(match[3]), .y = std::stod(match[4])};
-		Point2D vertex3 = { .x = std::stod(match[5]), .y = std::stod(match[6])};
-
-		return std::make_unique<CTriangle>(color, vertex1, vertex2, vertex3);
+		return std::make_unique<CTriangle>(ParseColor(colorWord), vertex1, vertex2, vertex3);
 	}
 
 	static std::unique_ptr<CShape> CreateEllipse(const std::string& description)
 	{
-		std::regex regex(R"(^(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s(\d+\.\d+)\s([a-z]+)$)");
-		std::smatch match;
+		std::istringstream iss(description);
 
-		if (!std::regex_match(description, match, regex))
-		{
-			throw std::invalid_argument("invalid ellipse description");
-		}
+		std::string colorWord;
+		Point2D center{};
+		double verticalRadius;
+		double horizontalRadius;
 
-		Color color = ParseColor(match[5]);
-		Point2D center = { .x = std::stod(match[1]), .y = std::stod(match[2])};
-		double horizontalRadius = std::stod(match[3]);
-		double verticalRadius = std::stod(match[4]);
+		iss >> colorWord >> center.x >> center.y >> verticalRadius >> horizontalRadius;
 
-		return std::make_unique<CEllipse>(color, center, horizontalRadius, verticalRadius);
+		return std::make_unique<CEllipse>(ParseColor(colorWord), center, verticalRadius, horizontalRadius);
 	}
 
 	static Color ParseColor(const std::string& raw)
@@ -117,26 +102,6 @@ private:
 			throw std::invalid_argument("invalid color name in rectangle description");
 		}
 		return it->second;
-	}
-
-	static std::vector<Point2D> ParseVertices(std::string raw)
-	{
-		// TODO: знак не обрабатывается
-		std::regex regex(R"((?:(\d+\.\d+)\s(\d+\.\d+))\s?)");
-		std::smatch match;
-
-		std::vector<Point2D> vertices;
-		while (std::regex_search(raw, match, regex))
-		{
-			vertices.emplace_back(Point2D{
-				.x = std::stod(match[1]),
-				.y = std::stod(match[2])
-			});
-
-			raw = match.suffix();
-		}
-
-		return vertices;
 	}
 
 	inline static std::map<std::string, Color> m_colorMapping{

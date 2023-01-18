@@ -1,0 +1,8 @@
+#ifndef LAB05_DOCUMENT_CPATH_H
+#define LAB05_DOCUMENT_CPATH_H
+
+class CPath
+{
+};
+
+#endif // LAB05_DOCUMENT_CPATH_H

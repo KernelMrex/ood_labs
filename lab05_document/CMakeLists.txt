@@ -15,6 +15,16 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(
         lab05_document
         src/main.cpp
+        src/lib/IRenderer.h
+        src/lib/INode.h
+        src/lib/CImageNode.h
+        src/lib/CImageNode.cpp
+        src/lib/CParagraphNode.h
+        src/lib/CListRenderer.h
+        src/lib/CPath.h
+        src/lib/CImageNode.cpp
+        src/lib/CParagraphNode.cpp
+        src/lib/CListRenderer.cpp
 )
 
 #add_executable(

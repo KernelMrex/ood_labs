@@ -12,6 +12,15 @@ public:
 	{
 	}
 
+	CPath(std::string dirPath, const std::string& filename)
+	{
+		if (!dirPath.ends_with('/'))
+		{
+			dirPath += '/';
+		}
+		m_path = dirPath + filename;
+	}
+
 	[[nodiscard]]
 	std::string String() const
 	{

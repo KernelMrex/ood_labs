@@ -21,11 +21,14 @@ add_executable(
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.h
         src/lib/CListRenderer.h
-        src/lib/CPath.h
+        src/lib/file/CPath.h
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.cpp
         src/lib/CListRenderer.cpp
         src/lib/CHtmlDocument.h
+        src/lib/file/IFileStorage.h
+        src/lib/file/CFileSystemFileStorage.h
+        src/lib/random/Random.h
 )
 
 add_executable(
@@ -36,14 +39,20 @@ add_executable(
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.h
         src/lib/CListRenderer.h
-        src/lib/CPath.h
+        src/lib/file/CPath.h
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.cpp
         src/lib/CListRenderer.cpp
         src/lib/CHtmlDocument.h
+        src/lib/file/IFileStorage.h
+        src/lib/file/CFileSystemFileStorage.h
+        src/lib/random/Random.h
 
         test/lib/CListRendererTest.cpp
         test/lib/CHtmlDocumentTest.cpp
+        test/lib/file/CPathTest.cpp
+        test/lib/file/MockFileStorage.cpp
+        test/lib/random/RandomTest.cpp
 )
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

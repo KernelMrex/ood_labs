@@ -12,3 +12,14 @@ TEST(CListRendererTest, RenderImageNode)
 
 	ASSERT_EQ(ss.str(), "Image: 400 300 test/path.png");
 }
+
+TEST(CListRendererTest, RenderParagraphNode)
+{
+	std::ostringstream ss;
+	CListRenderer renderer(ss);
+
+	CParagraphNode paragraphNode("Some text and stuff");
+	paragraphNode.Render(renderer);
+
+	ASSERT_EQ(ss.str(), "Paragraph: Some text and stuff");
+}

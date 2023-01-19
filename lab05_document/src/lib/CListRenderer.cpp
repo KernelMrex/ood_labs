@@ -7,5 +7,5 @@ void CListRenderer::RenderImage(const CImageNode& node)
 
 void CListRenderer::RenderParagraph(const CParagraphNode& node)
 {
-
+	m_out << "Paragraph: " << node.Text();
 }

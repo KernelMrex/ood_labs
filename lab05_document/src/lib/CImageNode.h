@@ -1,6 +1,8 @@
 #ifndef LAB05_DOCUMENT_CIMAGENODE_H
 #define LAB05_DOCUMENT_CIMAGENODE_H
 
+#include <utility>
+
 #include "CPath.h"
 #include "INode.h"
 #include "IRenderer.h"
@@ -9,7 +11,7 @@ class CImageNode : public INode
 {
 public:
 	CImageNode(CPath path, unsigned int width, unsigned int height)
-		: m_path(path)
+		: m_path(std::move(path))
 		, m_width(width)
 		, m_height(height)
 	{

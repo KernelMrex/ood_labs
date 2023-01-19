@@ -25,6 +25,7 @@ add_executable(
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.cpp
         src/lib/CListRenderer.cpp
+        src/lib/CHtmlDocument.h
 )
 
 add_executable(
@@ -39,8 +40,10 @@ add_executable(
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.cpp
         src/lib/CListRenderer.cpp
+        src/lib/CHtmlDocument.h
 
         test/lib/CListRendererTest.cpp
+        test/lib/CHtmlDocumentTest.cpp
 )
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

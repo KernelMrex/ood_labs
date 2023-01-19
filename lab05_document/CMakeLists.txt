@@ -25,6 +25,7 @@ add_executable(
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.cpp
         src/lib/CListRenderer.cpp
+        src/lib/IDocument.h
         src/lib/CHtmlDocument.h
         src/lib/file/IFileStorage.h
         src/lib/file/CFileSystemFileStorage.h
@@ -43,6 +44,7 @@ add_executable(
         src/lib/CImageNode.cpp
         src/lib/CParagraphNode.cpp
         src/lib/CListRenderer.cpp
+        src/lib/IDocument.h
         src/lib/CHtmlDocument.h
         src/lib/file/IFileStorage.h
         src/lib/file/CFileSystemFileStorage.h

@@ -1,8 +1,8 @@
 #ifndef LAB05_DOCUMENT_IDOCUMENT_H
 #define LAB05_DOCUMENT_IDOCUMENT_H
 
-#include "INode.h"
-#include "file/CPath.h"
+#include "../file/CPath.h"
+#include "node/INode.h"
 #include <memory>
 #include <optional>
 #include <string>

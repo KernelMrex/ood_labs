@@ -15,47 +15,48 @@ FetchContent_MakeAvailable(googletest)
 add_executable(
         lab05_document
         src/main.cpp
-        src/lib/IRenderer.h
-        src/lib/INode.h
-        src/lib/CImageNode.h
-        src/lib/CImageNode.cpp
-        src/lib/CParagraphNode.h
-        src/lib/CListRenderer.h
+        src/lib/document/render/IRenderer.h
+        src/lib/document/node/INode.h
+        src/lib/document/node/CImageNode.h
+        src/lib/document/node/CImageNode.cpp
+        src/lib/document/node/CParagraphNode.h
+        src/lib/document/render/CListRenderer.h
         src/lib/file/CPath.h
-        src/lib/CImageNode.cpp
-        src/lib/CParagraphNode.cpp
-        src/lib/CListRenderer.cpp
-        src/lib/IDocument.h
-        src/lib/CHtmlDocument.h
+        src/lib/document/node/CImageNode.cpp
+        src/lib/document/node/CParagraphNode.cpp
+        src/lib/document/render/CListRenderer.cpp
+        src/lib/document/IDocument.h
+        src/lib/document/CHtmlDocument.h
         src/lib/file/IFileStorage.h
         src/lib/file/CFileSystemFileStorage.h
         src/lib/random/Random.h
-        src/lib/CHtmlRenderer.cpp
-        src/lib/CHtmlRenderer.h
+        src/lib/document/render/CHtmlRenderer.cpp
+        src/lib/document/render/CHtmlRenderer.h
 )
 
 add_executable(
         lab05_document_test
-        src/lib/IRenderer.h
-        src/lib/INode.h
-        src/lib/CImageNode.h
-        src/lib/CImageNode.cpp
-        src/lib/CParagraphNode.h
-        src/lib/CListRenderer.h
+        src/lib/document/render/IRenderer.h
+        src/lib/document/node/INode.h
+        src/lib/document/node/CImageNode.h
+        src/lib/document/node/CImageNode.cpp
+        src/lib/document/node/CParagraphNode.h
+        src/lib/document/render/CListRenderer.h
         src/lib/file/CPath.h
-        src/lib/CImageNode.cpp
-        src/lib/CParagraphNode.cpp
-        src/lib/CListRenderer.cpp
-        src/lib/IDocument.h
-        src/lib/CHtmlDocument.h
+        src/lib/document/node/CImageNode.cpp
+        src/lib/document/node/CParagraphNode.cpp
+        src/lib/document/render/CListRenderer.cpp
+        src/lib/document/IDocument.h
+        src/lib/document/CHtmlDocument.h
         src/lib/file/IFileStorage.h
         src/lib/file/CFileSystemFileStorage.h
         src/lib/random/Random.h
-        src/lib/CHtmlRenderer.cpp
-        src/lib/CHtmlRenderer.h
+        src/lib/document/render/CHtmlRenderer.cpp
+        src/lib/document/render/CHtmlRenderer.h
 
-        test/lib/CListRendererTest.cpp
-        test/lib/CHtmlDocumentTest.cpp
+        test/lib/document/render/CListRendererTest.cpp
+        test/lib/document/render/CHtmlRendererTest.cpp
+        test/lib/document/CHtmlDocumentTest.cpp
         test/lib/file/CPathTest.cpp
         test/lib/file/MockFileStorage.cpp
         test/lib/random/RandomTest.cpp

@@ -3,9 +3,9 @@
 
 #include <utility>
 
+#include "../../file/CPath.h"
+#include "../render/IRenderer.h"
 #include "INode.h"
-#include "IRenderer.h"
-#include "file/CPath.h"
 
 class CImageNode : public INode
 {

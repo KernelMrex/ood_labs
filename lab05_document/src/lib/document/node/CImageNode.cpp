@@ -1,5 +1,5 @@
 #include "CImageNode.h"
-#include "IRenderer.h"
+#include "../render/IRenderer.h"
 
 void CImageNode::Render(IRenderer& renderer) const
 {

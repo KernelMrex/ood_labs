@@ -1,14 +1,14 @@
 #ifndef LAB05_DOCUMENT_CHTMLDOCUMENT_H
 #define LAB05_DOCUMENT_CHTMLDOCUMENT_H
 
-#include "CHtmlRenderer.h"
-#include "CImageNode.h"
-#include "CParagraphNode.h"
+#include "../file/CPath.h"
+#include "../file/IFileStorage.h"
+#include "../random/Random.h"
 #include "IDocument.h"
-#include "INode.h"
-#include "file/CPath.h"
-#include "file/IFileStorage.h"
-#include "random/Random.h"
+#include "node/CImageNode.h"
+#include "node/CParagraphNode.h"
+#include "node/INode.h"
+#include "render/CHtmlRenderer.h"
 
 #include <fstream>
 #include <memory>

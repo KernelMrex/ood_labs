@@ -1,4 +1,4 @@
-#include "../../src/lib/CListRenderer.h"
+#include "../../../../src/lib/document/render/CListRenderer.h"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

@@ -1,8 +1,8 @@
 #ifndef LAB05_DOCUMENT_IRENDERER_H
 #define LAB05_DOCUMENT_IRENDERER_H
 
-#include "CImageNode.h"
-#include "CParagraphNode.h"
+#include "../node/CImageNode.h"
+#include "../node/CParagraphNode.h"
 
 class CImageNode;
 class CParagraphNode;

@@ -1,7 +1,7 @@
-#include "../../src/lib/CHtmlDocument.h"
+#include "../../../src/lib/document/CHtmlDocument.h"
 #include <gtest/gtest.h>
 
-#include "file/MockFileStorage.cpp"
+#include "../file/MockFileStorage.cpp"
 
 TEST(CHtmlDocumentTest, InsertParagraph)
 {

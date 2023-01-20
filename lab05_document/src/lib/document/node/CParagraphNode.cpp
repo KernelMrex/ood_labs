@@ -1,5 +1,5 @@
 #include "CParagraphNode.h"
-#include "IRenderer.h"
+#include "../render/IRenderer.h"
 
 void CParagraphNode::Render(IRenderer& renderer) const
 {

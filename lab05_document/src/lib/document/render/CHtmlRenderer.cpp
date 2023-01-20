@@ -7,5 +7,5 @@ void CHtmlRenderer::RenderImage(const CImageNode& node)
 
 void CHtmlRenderer::RenderParagraph(const CParagraphNode& node)
 {
-	m_out << "<p>" << node.Text() << "<p>";
+	m_out << "<p>" << node.Text() << "</p>";
 }

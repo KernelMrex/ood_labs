@@ -103,3 +103,42 @@ TEST(CHtmlDocumentTest, GetAndSetTitle)
 	doc.SetTitle("Testing title");
 	ASSERT_EQ(doc.GetTitle(), "Testing title");
 }
+
+TEST(CHtmlDocumentTest, DeletingNode)
+{
+	CHtmlDocument doc(std::make_shared<MockFileStorage>());
+
+	doc.InsertParagraph("Test paragraph 0");
+	doc.InsertParagraph("Test paragraph 1");
+	doc.InsertParagraph("Test paragraph 2");
+
+	ASSERT_EQ(doc.GetNodesCount(), 3);
+
+	ASSERT_NO_THROW({
+		doc.DeleteNode(1);
+	});
+
+	ASSERT_EQ(doc.GetNodesCount(), 2);
+
+	auto node1 = doc.GetNode(0);
+	auto paragraphNode1 = std::dynamic_pointer_cast<CParagraphNode>(node1);
+	ASSERT_NE(paragraphNode1.get(), nullptr);
+	ASSERT_EQ(paragraphNode1->Text(), "Test paragraph 0");
+
+	auto node2 = doc.GetNode(1);
+	auto paragraphNode2 = std::dynamic_pointer_cast<CParagraphNode>(node2);
+	ASSERT_NE(paragraphNode2.get(), nullptr);
+	ASSERT_EQ(paragraphNode2->Text(), "Test paragraph 2");
+}
+
+TEST(CHtmlDocumentTest, DeletingNodeOutOfRange)
+{
+	CHtmlDocument doc(std::make_shared<MockFileStorage>());
+
+	doc.InsertParagraph("Test paragraph 0");
+	doc.InsertParagraph("Test paragraph 1");
+
+	ASSERT_THROW({
+		doc.DeleteNode(2);
+	}, std::out_of_range);
+}

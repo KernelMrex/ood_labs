@@ -57,6 +57,18 @@ public:
 		return m_nodes[index];
 	}
 
+	void DeleteNode(std::size_t index) override
+	{
+		if (index >= m_nodes.size())
+		{
+			throw std::out_of_range("no such node");
+		}
+
+		auto it = m_nodes.begin();
+		std::advance(it, index);
+		m_nodes.erase(it);
+	}
+
 	void SetTitle(const std::string& title) override
 	{
 		m_title = title;

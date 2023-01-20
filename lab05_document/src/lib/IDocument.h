@@ -20,6 +20,8 @@ public:
 	[[nodiscard]]
 	virtual std::shared_ptr<INode> GetNode(std::size_t index) const = 0;
 
+	virtual void DeleteNode(std::size_t index) = 0;
+
 	virtual void SetTitle(const std::string& title) = 0;
 
 	[[nodiscard]]

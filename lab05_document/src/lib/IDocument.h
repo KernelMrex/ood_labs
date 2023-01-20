@@ -20,6 +20,8 @@ public:
 	[[nodiscard]]
 	virtual std::shared_ptr<INode> GetNode(std::size_t index) const = 0;
 
+	virtual void Save(const CPath& path) const = 0;
+
 	virtual ~IDocument() = default;
 };
 

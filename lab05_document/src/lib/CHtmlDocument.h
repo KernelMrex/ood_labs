@@ -1,6 +1,7 @@
 #ifndef LAB05_DOCUMENT_CHTMLDOCUMENT_H
 #define LAB05_DOCUMENT_CHTMLDOCUMENT_H
 
+#include "CHtmlRenderer.h"
 #include "CImageNode.h"
 #include "CParagraphNode.h"
 #include "IDocument.h"
@@ -9,6 +10,7 @@
 #include "file/IFileStorage.h"
 #include "random/Random.h"
 
+#include <fstream>
 #include <memory>
 #include <optional>
 #include <utility>
@@ -53,6 +55,32 @@ public:
 		}
 
 		return m_nodes[index];
+	}
+
+	void Save(const CPath& path) const override
+	{
+		std::ofstream file(path.String());
+		if (!file)
+		{
+			throw std::runtime_error("could not open file to save");
+		}
+
+		file << "<!doctype html>"
+				"<html>"
+				"<head><title>Our Funky HTML Page</title></head>"
+				"<body>";
+
+		CHtmlRenderer htmlRenderer(file);
+		for (auto& node : m_nodes)
+		{
+			node->Render(htmlRenderer);
+		}
+
+		file << "</body>"
+				"</html>";
+
+		file.flush();
+		file.close();
 	}
 
 private:

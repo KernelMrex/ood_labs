@@ -30,6 +30,8 @@ add_executable(
         src/lib/file/IFileStorage.h
         src/lib/file/CFileSystemFileStorage.h
         src/lib/random/Random.h
+        src/lib/CHtmlRenderer.cpp
+        src/lib/CHtmlRenderer.h
 )
 
 add_executable(
@@ -49,6 +51,8 @@ add_executable(
         src/lib/file/IFileStorage.h
         src/lib/file/CFileSystemFileStorage.h
         src/lib/random/Random.h
+        src/lib/CHtmlRenderer.cpp
+        src/lib/CHtmlRenderer.h
 
         test/lib/CListRendererTest.cpp
         test/lib/CHtmlDocumentTest.cpp

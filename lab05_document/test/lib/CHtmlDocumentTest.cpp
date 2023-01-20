@@ -94,3 +94,12 @@ TEST(CHtmlDocumentTest, CouldNotInsertImageDueFileStorageError)
 		doc.InsertImage(CPath("/dev/null"), 400, 300);
 	}, std::runtime_error);
 }
+
+TEST(CHtmlDocumentTest, GetAndSetTitle)
+{
+	CHtmlDocument doc(std::make_shared<MockFileStorage>());
+	ASSERT_EQ(doc.GetTitle(), "");
+
+	doc.SetTitle("Testing title");
+	ASSERT_EQ(doc.GetTitle(), "Testing title");
+}

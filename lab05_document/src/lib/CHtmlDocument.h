@@ -57,6 +57,17 @@ public:
 		return m_nodes[index];
 	}
 
+	void SetTitle(const std::string& title) override
+	{
+		m_title = title;
+	}
+
+	[[nodiscard]]
+	std::string GetTitle() const override
+	{
+		return m_title;
+	}
+
 	void Save(const CPath& path) const override
 	{
 		std::ofstream file(path.String());
@@ -86,6 +97,7 @@ public:
 private:
 	std::vector<std::shared_ptr<INode>> m_nodes;
 	std::shared_ptr<IFileStorage> m_imageStorage;
+	std::string m_title;
 
 	void InsertNode(const std::shared_ptr<INode>& node, std::optional<std::size_t> position = std::nullopt)
 	{

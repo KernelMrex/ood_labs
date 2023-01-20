@@ -32,6 +32,8 @@ add_executable(
         src/lib/random/Random.h
         src/lib/document/render/CHtmlRenderer.cpp
         src/lib/document/render/CHtmlRenderer.h
+        src/lib/command/ICommand.h
+        src/lib/command/CInsertParagraphCommand.h
 )
 
 add_executable(
@@ -53,6 +55,8 @@ add_executable(
         src/lib/random/Random.h
         src/lib/document/render/CHtmlRenderer.cpp
         src/lib/document/render/CHtmlRenderer.h
+        src/lib/command/ICommand.h
+        src/lib/command/CInsertParagraphCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp
@@ -60,6 +64,8 @@ add_executable(
         test/lib/file/CPathTest.cpp
         test/lib/file/MockFileStorage.cpp
         test/lib/random/RandomTest.cpp
+        test/lib/document/MockDocument.cpp
+        test/lib/command/CInsertParagraphCommandTest.cpp
 )
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

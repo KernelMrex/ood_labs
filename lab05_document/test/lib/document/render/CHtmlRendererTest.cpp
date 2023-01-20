@@ -3,7 +3,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-TEST(CListRendererTest, RenderImageNode)
+TEST(CHtmlRendererTest, RenderImageNode)
 {
 	std::ostringstream ss;
 	CHtmlRenderer renderer(ss);
@@ -11,10 +11,10 @@ TEST(CListRendererTest, RenderImageNode)
 	CImageNode imageNode(CPath("test/path.png"), 400, 300);
 	imageNode.Render(renderer);
 
-	ASSERT_EQ(ss.str(), "<img src=\"test/path.png\" height=\"400\" width=\"300\">");
+	ASSERT_EQ(ss.str(), "<img src=\"test/path.png\" width=\"400\" height=\"300\">");
 }
 
-TEST(CListRendererTest, RenderParagraphNode)
+TEST(CHtmlRendererTest, RenderParagraphNode)
 {
 	std::ostringstream ss;
 	CHtmlRenderer renderer(ss);

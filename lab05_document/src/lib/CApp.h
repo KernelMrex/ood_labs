@@ -24,7 +24,7 @@ public:
 	void ListenAndServe()
 	{
 		auto doc = std::make_shared<CHtmlDocument>(m_fileStorage);
-		auto commandFactory = std::make_shared<CDocumentCommandFactory>(doc);
+		auto commandFactory = std::make_shared<CDocumentCommandFactory>(doc, m_out);
 
 		for (std::string line; std::getline(m_in, line);)
 		{

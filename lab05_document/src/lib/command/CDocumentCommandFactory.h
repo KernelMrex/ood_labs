@@ -11,17 +11,19 @@
 #include "CDeleteNodeCommand.h"
 #include "CInsertImageCommand.h"
 #include "CInsertParagraphCommand.h"
+#include "CListCommand.h"
 #include "CSaveCommand.h"
 #include "CSetTitleCommand.h"
 #include "ICommandFactory.h"
 
-using CommandCreationHandler = std::function<std::unique_ptr<ICommand>(const std::shared_ptr<IDocument>&, const std::string&)>;
+using CommandCreationHandler = std::function<std::unique_ptr<ICommand>(const std::shared_ptr<IDocument>&, std::ostream&, const std::string&)>;
 
 class CDocumentCommandFactory : public ICommandFactory
 {
 public:
-	explicit CDocumentCommandFactory(std::shared_ptr<IDocument> doc)
-		: m_doc(std::move(doc)){};
+	CDocumentCommandFactory(std::shared_ptr<IDocument> doc, std::ostream& out)
+		: m_doc(std::move(doc))
+		, m_out(out) {};
 
 	[[nodiscard]]
 	std::unique_ptr<ICommand> CreateCommand(const std::string& description) const override
@@ -40,14 +42,15 @@ public:
 		std::ostringstream oss;
 		oss << iss.rdbuf();
 
-		return handler->second(m_doc, Trim(oss.str()));
+		return handler->second(m_doc, m_out, Trim(oss.str()));
 	}
 
 private:
 	std::shared_ptr<IDocument> m_doc;
+	std::ostream& m_out;
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateInsertParagraphCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	static std::unique_ptr<ICommand> CreateInsertParagraphCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
 	{
 		std::istringstream iss(description);
 
@@ -62,7 +65,7 @@ private:
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateInsertImageCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	static std::unique_ptr<ICommand> CreateInsertImageCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
 	{
 		std::istringstream iss(description);
 
@@ -80,7 +83,7 @@ private:
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateDeleteNodeCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	static std::unique_ptr<ICommand> CreateDeleteNodeCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
 	{
 		std::istringstream iss(description);
 
@@ -91,15 +94,21 @@ private:
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateSaveCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	static std::unique_ptr<ICommand> CreateSaveCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
 	{
 		return std::make_unique<CSaveCommand>(doc, CPath(description));
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateSetTitleCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	static std::unique_ptr<ICommand> CreateSetTitleCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
 	{
 		return std::make_unique<CSetTitleCommand>(doc, description);
+	}
+
+	[[nodiscard]]
+	static std::unique_ptr<ICommand> CreateListCommand(const std::shared_ptr<IDocument>& doc, std::ostream& out, const std::string& _)
+	{
+		return std::make_unique<CListCommand>(doc, out);
 	}
 
 	inline static std::map<std::string, CommandCreationHandler> m_commandHandler {
@@ -108,6 +117,7 @@ private:
 		{ "DeleteNode", CreateDeleteNodeCommand },
 		{ "Save", CreateSaveCommand },
 		{ "SetTitle", CreateSetTitleCommand },
+		{ "List", CreateListCommand }
 	};
 };
 

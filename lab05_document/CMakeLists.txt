@@ -41,6 +41,7 @@ add_executable(
         src/lib/utils/Strings.h
         src/lib/command/CDeleteNodeCommand.h
         src/lib/command/CSaveCommand.h
+        src/lib/command/CSetTitleCommand.h
 )
 
 add_executable(
@@ -70,6 +71,7 @@ add_executable(
         src/lib/utils/Strings.h
         src/lib/command/CDeleteNodeCommand.h
         src/lib/command/CSaveCommand.h
+        src/lib/command/CSetTitleCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp
@@ -85,6 +87,7 @@ add_executable(
         test/lib/utils/StringTest.cpp
         test/lib/command/CDeleteNodeCommandTest.cpp
         test/lib/command/CSaveCommandTest.cpp
+        test/lib/command/CSetTitleCommandTest.cpp
 )
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

@@ -93,3 +93,18 @@ TEST(CDocumentCommandFactoryTest, CreateSaveCommand)
 	ASSERT_NE(pSaveCommand, nullptr);
 	pSaveCommand->Execute();
 }
+
+TEST(CDocumentCommandFactoryTest, CreateSetTitleCommand)
+{
+	auto mockDoc = std::make_shared<MockDocument>();
+	EXPECT_CALL(*mockDoc, SetTitle("New testing title!")).Times(1);
+
+	CDocumentCommandFactory commandFactory(mockDoc);
+
+	std::string commandDescription = "SetTitle New testing title!";
+
+	auto command = commandFactory.CreateCommand(commandDescription);
+	auto pSetTitleCommand = dynamic_cast<CSetTitleCommand*>(command.get());
+	ASSERT_NE(pSetTitleCommand, nullptr);
+	pSetTitleCommand->Execute();
+}

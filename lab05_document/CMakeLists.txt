@@ -34,6 +34,7 @@ add_executable(
         src/lib/document/render/CHtmlRenderer.h
         src/lib/command/ICommand.h
         src/lib/command/CInsertParagraphCommand.h
+        src/lib/command/CInsertImageCommand.h
 )
 
 add_executable(
@@ -57,6 +58,7 @@ add_executable(
         src/lib/document/render/CHtmlRenderer.h
         src/lib/command/ICommand.h
         src/lib/command/CInsertParagraphCommand.h
+        src/lib/command/CInsertImageCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp
@@ -66,6 +68,7 @@ add_executable(
         test/lib/random/RandomTest.cpp
         test/lib/document/MockDocument.cpp
         test/lib/command/CInsertParagraphCommandTest.cpp
-)
+        test/lib/command/CInsertImageCommandTest.cpp
+        test/lib/file/CPathMatchers.cpp)
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

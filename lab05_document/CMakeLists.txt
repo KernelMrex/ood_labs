@@ -35,6 +35,10 @@ add_executable(
         src/lib/command/ICommand.h
         src/lib/command/CInsertParagraphCommand.h
         src/lib/command/CInsertImageCommand.h
+        src/lib/CApp.h
+        src/lib/command/ICommandFactory.h
+        src/lib/command/CDocumentCommandFactory.h
+        src/lib/utils/Strings.h
 )
 
 add_executable(
@@ -59,6 +63,9 @@ add_executable(
         src/lib/command/ICommand.h
         src/lib/command/CInsertParagraphCommand.h
         src/lib/command/CInsertImageCommand.h
+        src/lib/command/ICommandFactory.h
+        src/lib/command/CDocumentCommandFactory.h
+        src/lib/utils/Strings.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp
@@ -69,6 +76,9 @@ add_executable(
         test/lib/document/MockDocument.cpp
         test/lib/command/CInsertParagraphCommandTest.cpp
         test/lib/command/CInsertImageCommandTest.cpp
-        test/lib/file/CPathMatchers.cpp)
+        test/lib/file/CPathMatchers.cpp src/lib/CApp.h
+        test/lib/command/CDocumentCommandFactoryTest.cpp
+        test/lib/utils/StringTest.cpp
+)
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

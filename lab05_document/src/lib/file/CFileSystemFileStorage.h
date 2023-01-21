@@ -11,9 +11,14 @@ public:
 	explicit CFileSystemFileStorage(CPath dirPath)
 		: m_dirPath(std::move(dirPath))
 	{
+		if (!std::filesystem::exists(m_dirPath.String()) && !std::filesystem::create_directory(m_dirPath.String()))
+		{
+			throw std::runtime_error("could not create dir at given path");
+		}
+
 		if (!std::filesystem::is_directory(m_dirPath.String()))
 		{
-			throw std::invalid_argument("given path to dir is invalid");
+			throw std::invalid_argument("given path to dir is not a dir");
 		}
 	}
 

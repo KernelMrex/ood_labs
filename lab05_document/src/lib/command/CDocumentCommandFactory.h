@@ -8,6 +8,7 @@
 
 #include "../document/IDocument.h"
 #include "../utils/Strings.h"
+#include "CDeleteNodeCommand.h"
 #include "CInsertImageCommand.h"
 #include "CInsertParagraphCommand.h"
 #include "ICommandFactory.h"
@@ -76,9 +77,21 @@ private:
 		return std::make_unique<CInsertImageCommand>(doc, CPath(Trim(rawPathOSS.str())), width, height, position);
 	}
 
+	[[nodiscard]]
+	static std::unique_ptr<ICommand> CreateDeleteNodeCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	{
+		std::istringstream iss(description);
+
+		std::size_t index;
+		iss >> index;
+
+		return std::make_unique<CDeleteNodeCommand>(doc, index);
+	}
+
 	inline static std::map<std::string, CommandCreationHandler> m_commandHandler {
 		{ "InsertParagraph", CreateInsertParagraphCommand },
 		{ "InsertImage", CreateInsertImageCommand },
+		{ "DeleteNode", CreateDeleteNodeCommand },
 	};
 };
 

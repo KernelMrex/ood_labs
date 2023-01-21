@@ -63,3 +63,18 @@ TEST(CDocumentCommandFactoryTest, CreateInsertImageCommandTestWithDefinedPositio
 	ASSERT_NE(pInsertImageCommand, nullptr);
 	pInsertImageCommand->Execute();
 }
+
+TEST(CDocumentCommandFactoryTest, CreateDeleteNodeCommand)
+{
+	auto mockDoc = std::make_shared<MockDocument>();
+	EXPECT_CALL(*mockDoc, DeleteNode(::testing::Eq(4))).Times(1);
+
+	CDocumentCommandFactory commandFactory(mockDoc);
+
+	std::string commandDescription = "DeleteNode 4";
+
+	auto command = commandFactory.CreateCommand(commandDescription);
+	auto pDeleteNodeCommand = dynamic_cast<CDeleteNodeCommand*>(command.get());
+	ASSERT_NE(pDeleteNodeCommand, nullptr);
+	pDeleteNodeCommand->Execute();
+}

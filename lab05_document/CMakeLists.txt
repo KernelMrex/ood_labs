@@ -39,6 +39,7 @@ add_executable(
         src/lib/command/ICommandFactory.h
         src/lib/command/CDocumentCommandFactory.h
         src/lib/utils/Strings.h
+        src/lib/command/CDeleteNodeCommand.h
 )
 
 add_executable(
@@ -66,6 +67,7 @@ add_executable(
         src/lib/command/ICommandFactory.h
         src/lib/command/CDocumentCommandFactory.h
         src/lib/utils/Strings.h
+        src/lib/command/CDeleteNodeCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp

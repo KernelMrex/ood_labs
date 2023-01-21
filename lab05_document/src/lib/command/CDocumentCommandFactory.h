@@ -11,6 +11,7 @@
 #include "CDeleteNodeCommand.h"
 #include "CInsertImageCommand.h"
 #include "CInsertParagraphCommand.h"
+#include "CSaveCommand.h"
 #include "ICommandFactory.h"
 
 using CommandCreationHandler = std::function<std::unique_ptr<ICommand>(const std::shared_ptr<IDocument>&, const std::string&)>;
@@ -88,10 +89,17 @@ private:
 		return std::make_unique<CDeleteNodeCommand>(doc, index);
 	}
 
+	[[nodiscard]]
+	static std::unique_ptr<ICommand> CreateSaveCommand(const std::shared_ptr<IDocument>& doc, const std::string& description)
+	{
+		return std::make_unique<CSaveCommand>(doc, CPath(description));
+	}
+
 	inline static std::map<std::string, CommandCreationHandler> m_commandHandler {
 		{ "InsertParagraph", CreateInsertParagraphCommand },
 		{ "InsertImage", CreateInsertImageCommand },
 		{ "DeleteNode", CreateDeleteNodeCommand },
+		{ "Save", CreateSaveCommand },
 	};
 };
 

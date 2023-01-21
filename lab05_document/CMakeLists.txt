@@ -40,7 +40,7 @@ add_executable(
         src/lib/command/CDocumentCommandFactory.h
         src/lib/utils/Strings.h
         src/lib/command/CDeleteNodeCommand.h
-)
+        src/lib/command/CSaveCommand.h)
 
 add_executable(
         lab05_document_test
@@ -81,6 +81,6 @@ add_executable(
         test/lib/file/CPathMatchers.cpp src/lib/CApp.h
         test/lib/command/CDocumentCommandFactoryTest.cpp
         test/lib/utils/StringTest.cpp
-)
+        src/lib/command/CSaveCommand.h)
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

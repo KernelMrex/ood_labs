@@ -78,3 +78,18 @@ TEST(CDocumentCommandFactoryTest, CreateDeleteNodeCommand)
 	ASSERT_NE(pDeleteNodeCommand, nullptr);
 	pDeleteNodeCommand->Execute();
 }
+
+TEST(CDocumentCommandFactoryTest, CreateSaveCommand)
+{
+	auto mockDoc = std::make_shared<MockDocument>();
+	EXPECT_CALL(*mockDoc, Save(CPathEq(CPath("test/path.txt")))).Times(1);
+
+	CDocumentCommandFactory commandFactory(mockDoc);
+
+	std::string commandDescription = "Save test/path.txt";
+
+	auto command = commandFactory.CreateCommand(commandDescription);
+	auto pSaveCommand = dynamic_cast<CSaveCommand*>(command.get());
+	ASSERT_NE(pSaveCommand, nullptr);
+	pSaveCommand->Execute();
+}

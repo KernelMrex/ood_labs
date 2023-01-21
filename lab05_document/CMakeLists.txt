@@ -83,6 +83,8 @@ add_executable(
         test/lib/file/CPathMatchers.cpp src/lib/CApp.h
         test/lib/command/CDocumentCommandFactoryTest.cpp
         test/lib/utils/StringTest.cpp
+        test/lib/command/CDeleteNodeCommandTest.cpp
+        test/lib/command/CSaveCommandTest.cpp
 )
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

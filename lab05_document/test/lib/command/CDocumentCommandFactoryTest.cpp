@@ -1,5 +1,6 @@
 #include "../../../src/lib/command/CDocumentCommandFactory.h"
 #include "../document/MockDocument.cpp"
+#include "../file/CPathMatchers.cpp"
 
 #include <gtest/gtest.h>
 
@@ -31,4 +32,34 @@ TEST(CDocumentCommandFactoryTest, CreateInsertParagraphCommandTestWithDefinedPos
 	auto pInsertParagraphCommand = dynamic_cast<CInsertParagraphCommand*>(command.get());
 	ASSERT_NE(pInsertParagraphCommand, nullptr);
 	pInsertParagraphCommand->Execute();
+}
+
+TEST(CDocumentCommandFactoryTest, CreateInsertImageCommandTestWithEndPosition)
+{
+	auto mockDoc = std::make_shared<MockDocument>();
+	EXPECT_CALL(*mockDoc, InsertImage(CPathEq(CPath("test.dat")), 400, 300, ::testing::Eq(std::nullopt))).Times(1);
+
+	CDocumentCommandFactory commandFactory(mockDoc);
+
+	std::string commandDescription = "InsertImage end 400 300 test.dat";
+
+	auto command = commandFactory.CreateCommand(commandDescription);
+	auto pInsertImageCommand = dynamic_cast<CInsertImageCommand*>(command.get());
+	ASSERT_NE(pInsertImageCommand, nullptr);
+	pInsertImageCommand->Execute();
+}
+
+TEST(CDocumentCommandFactoryTest, CreateInsertImageCommandTestWithDefinedPosition)
+{
+	auto mockDoc = std::make_shared<MockDocument>();
+	EXPECT_CALL(*mockDoc, InsertImage(CPathEq(CPath("test.dat")), 400, 300, ::testing::Eq(4))).Times(1);
+
+	CDocumentCommandFactory commandFactory(mockDoc);
+
+	std::string commandDescription = "InsertImage 4 400 300 test.dat";
+
+	auto command = commandFactory.CreateCommand(commandDescription);
+	auto pInsertImageCommand = dynamic_cast<CInsertImageCommand*>(command.get());
+	ASSERT_NE(pInsertImageCommand, nullptr);
+	pInsertImageCommand->Execute();
 }

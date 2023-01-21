@@ -9,6 +9,7 @@
 #include "../document/IDocument.h"
 #include "../utils/Strings.h"
 #include "CDeleteNodeCommand.h"
+#include "CHelpCommand.h"
 #include "CInsertImageCommand.h"
 #include "CInsertParagraphCommand.h"
 #include "CListCommand.h"
@@ -111,13 +112,20 @@ private:
 		return std::make_unique<CListCommand>(doc, out);
 	}
 
+	[[nodiscard]]
+	static std::unique_ptr<ICommand> CreateHelpCommand(const std::shared_ptr<IDocument>& _0, std::ostream& out, const std::string& _1)
+	{
+		return std::make_unique<CHelpCommand>(out);
+	}
+
 	inline static std::map<std::string, CommandCreationHandler> m_commandHandler {
 		{ "InsertParagraph", CreateInsertParagraphCommand },
 		{ "InsertImage", CreateInsertImageCommand },
 		{ "DeleteNode", CreateDeleteNodeCommand },
 		{ "Save", CreateSaveCommand },
 		{ "SetTitle", CreateSetTitleCommand },
-		{ "List", CreateListCommand }
+		{ "List", CreateListCommand },
+		{ "Help", CreateHelpCommand },
 	};
 };
 

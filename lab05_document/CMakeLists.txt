@@ -43,6 +43,7 @@ add_executable(
         src/lib/command/CSaveCommand.h
         src/lib/command/CSetTitleCommand.h
         src/lib/command/CListCommand.h
+        src/lib/command/CHelpCommand.h
 )
 
 add_executable(
@@ -74,6 +75,7 @@ add_executable(
         src/lib/command/CSaveCommand.h
         src/lib/command/CSetTitleCommand.h
         src/lib/command/CListCommand.h
+        src/lib/command/CHelpCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp
@@ -92,6 +94,6 @@ add_executable(
         test/lib/command/CSetTitleCommandTest.cpp
         test/lib/command/CListCommandTest.cpp
         test/lib/document/node/MockNode.cpp
-)
+        test/lib/command/CHelpCommandTest.cpp)
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

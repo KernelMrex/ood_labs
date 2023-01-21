@@ -143,3 +143,14 @@ TEST(CDocumentCommandFactoryTest, CreateListCommand)
 	ASSERT_NE(pListCommand, nullptr);
 	pListCommand->Execute();
 }
+
+TEST(CDocumentCommandFactoryTest, CreateHelpCommand)
+{
+	std::ostringstream oss;
+	auto mockDoc = std::make_shared<MockDocument>();
+	CDocumentCommandFactory commandFactory(mockDoc, oss);
+
+	auto command = commandFactory.CreateCommand("Help");
+	auto pHelpCommand = dynamic_cast<CHelpCommand*>(command.get());
+	ASSERT_NE(pHelpCommand, nullptr);
+}

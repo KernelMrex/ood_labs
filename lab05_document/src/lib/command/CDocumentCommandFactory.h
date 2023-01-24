@@ -13,6 +13,7 @@
 #include "CInsertImageCommand.h"
 #include "CInsertParagraphCommand.h"
 #include "CListCommand.h"
+#include "CRedoCommand.h"
 #include "CSaveCommand.h"
 #include "CSaveToHistoryCommandDecorator.h"
 #include "CSetTitleCommand.h"
@@ -25,10 +26,12 @@ public:
 	CDocumentCommandFactory(
 		std::shared_ptr<IDocument> doc,
 		std::ostream& out,
-		std::shared_ptr<ICommandHistory> commandHistory)
+		std::shared_ptr<ICommandHistory> commandHistory,
+		std::shared_ptr<ICommandHistory> redoCommandHistory)
 		: m_doc(std::move(doc))
 		, m_out(out)
 		, m_commandHistory(std::move(commandHistory))
+		, m_redoCommandHistory(std::move(redoCommandHistory))
 	{
 		m_commandHandlerMap = std::map<std::string, std::function<std::unique_ptr<ICommand>(const std::string&)>>{
 			{ "InsertParagraph", [this](const std::string& description) { return CreateInsertParagraphCommand(description); } },
@@ -38,7 +41,8 @@ public:
 			{ "SetTitle", [this](const std::string& description) { return CreateSetTitleCommand(description); } },
 			{ "List", [this](const std::string& description) { return CreateListCommand(description); } },
 			{ "Help", [this](const std::string& description) { return CreateHelpCommand(description); } },
-			{ "Undo",  [this](const std::string& description) { return CreateUndoCommand(description); } }
+			{ "Undo",  [this](const std::string& description) { return CreateUndoCommand(description); } },
+			{ "Redo", [this](const std::string& description) { return CreateRedoCommand(description); } },
 		};
 	};
 
@@ -66,6 +70,7 @@ private:
 	std::shared_ptr<IDocument> m_doc;
 	std::ostream& m_out;
 	std::shared_ptr<ICommandHistory> m_commandHistory;
+	std::shared_ptr<ICommandHistory> m_redoCommandHistory;
 	std::map<std::string, std::function<std::unique_ptr<ICommand>(const std::string&)>> m_commandHandlerMap;
 
 	[[nodiscard]]
@@ -81,8 +86,8 @@ private:
 
 		return std::make_unique<CSaveToHistoryCommandDecorator>(
 			std::make_shared<CInsertParagraphCommand>(m_doc, Trim(textOSS.str()), position),
-			m_commandHistory
-		);
+			m_commandHistory,
+			m_redoCommandHistory);
 	}
 
 	[[nodiscard]]
@@ -102,8 +107,8 @@ private:
 
 		return std::make_unique<CSaveToHistoryCommandDecorator>(
 			std::make_unique<CInsertImageCommand>(m_doc, CPath(Trim(rawPathOSS.str())), width, height, position),
-			m_commandHistory
-		);
+			m_commandHistory,
+			m_redoCommandHistory);
 	}
 
 	[[nodiscard]]
@@ -116,8 +121,8 @@ private:
 
 		return std::make_unique<CSaveToHistoryCommandDecorator>(
 			std::make_unique<CDeleteNodeCommand>(m_doc, index),
-			m_commandHistory
-		);
+			m_commandHistory,
+			m_redoCommandHistory);
 	}
 
 	[[nodiscard]]
@@ -131,26 +136,32 @@ private:
 	{
 		return std::make_unique<CSaveToHistoryCommandDecorator>(
 			std::make_unique<CSetTitleCommand>(m_doc, description),
-			m_commandHistory
-		);
+			m_commandHistory,
+			m_redoCommandHistory);
 	}
 
 	[[nodiscard]]
-	std::unique_ptr<ICommand> CreateListCommand(const std::string& _)
+	std::unique_ptr<ICommand> CreateListCommand(const std::string&)
 	{
 		return std::make_unique<CListCommand>(m_doc, m_out);
 	}
 
 	[[nodiscard]]
-	std::unique_ptr<ICommand> CreateHelpCommand(const std::string& _)
+	std::unique_ptr<ICommand> CreateHelpCommand(const std::string&)
 	{
 		return std::make_unique<CHelpCommand>(m_out);
 	}
 
 	[[nodiscard]]
-	std::unique_ptr<ICommand> CreateUndoCommand(const std::string& _)
+	std::unique_ptr<ICommand> CreateUndoCommand(const std::string&)
 	{
-		return std::make_unique<CUndoCommand>(m_commandHistory);
+		return std::make_unique<CUndoCommand>(m_commandHistory, m_redoCommandHistory);
+	}
+
+	[[nodiscard]]
+	std::unique_ptr<ICommand> CreateRedoCommand(const std::string&)
+	{
+		return std::make_unique<CRedoCommand>(m_commandHistory, m_redoCommandHistory);
 	}
 };
 

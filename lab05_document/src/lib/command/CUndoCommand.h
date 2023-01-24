@@ -8,8 +8,10 @@ class CUndoCommand : public ICommand
 {
 public:
 	explicit CUndoCommand(
-		std::shared_ptr<ICommandHistory> commandHistory)
+		std::shared_ptr<ICommandHistory> commandHistory,
+		std::shared_ptr<ICommandHistory> redoCommandHistory)
 		: m_commandHistory(std::move(commandHistory))
+		, m_redoCommandHistory(std::move(redoCommandHistory))
 	{
 	}
 
@@ -20,6 +22,7 @@ public:
 		{
 			return;
 		}
+		m_redoCommandHistory->Push(command);
 		command->Undo();
 	}
 
@@ -29,6 +32,7 @@ public:
 
 private:
 	std::shared_ptr<ICommandHistory> m_commandHistory;
+	std::shared_ptr<ICommandHistory> m_redoCommandHistory;
 };
 
 #endif // LAB05_DOCUMENT_CUNDOCOMMAND_H

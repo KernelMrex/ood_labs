@@ -13,7 +13,12 @@ TEST(CDocumentCommandFactoryTest, CreateInsertParagraphCommandTestWithEndPositio
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, InsertParagraph("This is paragraph text", ::testing::Eq(std::nullopt))).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "InsertParagraph end This is paragraph text";
 
@@ -32,7 +37,12 @@ TEST(CDocumentCommandFactoryTest, CreateInsertParagraphCommandTestWithDefinedPos
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, InsertParagraph("This is paragraph text", ::testing::Eq(4))).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "InsertParagraph 4 This is paragraph text";
 
@@ -51,7 +61,12 @@ TEST(CDocumentCommandFactoryTest, CreateInsertImageCommandTestWithEndPosition)
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, InsertImage(CPathEq(CPath("test.dat")), 400, 300, ::testing::Eq(std::nullopt))).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "InsertImage end 400 300 test.dat";
 
@@ -70,7 +85,12 @@ TEST(CDocumentCommandFactoryTest, CreateInsertImageCommandTestWithDefinedPositio
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, InsertImage(CPathEq(CPath("test.dat")), 400, 300, ::testing::Eq(4))).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "InsertImage 4 400 300 test.dat";
 
@@ -89,7 +109,12 @@ TEST(CDocumentCommandFactoryTest, CreateDeleteNodeCommand)
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, DeleteNode(::testing::Eq(4))).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "DeleteNode 4";
 
@@ -108,7 +133,12 @@ TEST(CDocumentCommandFactoryTest, CreateSaveCommand)
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, Save(CPathEq(CPath("test/path.txt")))).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "Save test/path.txt";
 
@@ -125,7 +155,12 @@ TEST(CDocumentCommandFactoryTest, CreateSetTitleCommand)
 	auto mockDoc = std::make_shared<MockDocument>();
 	EXPECT_CALL(*mockDoc, SetTitle("New testing title!")).Times(1);
 
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	std::string commandDescription = "SetTitle New testing title!";
 
@@ -149,7 +184,12 @@ TEST(CDocumentCommandFactoryTest, CreateListCommand)
 	EXPECT_CALL(*mockDoc, GetNodesCount()).WillRepeatedly(::testing::Return(2));
 	EXPECT_CALL(*mockDoc, GetNode(::testing::_)).WillRepeatedly(::testing::Return(mockNode));
 
-	CDocumentCommandFactory commandFactory(mockDoc, oss, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		oss,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	auto command = commandFactory.CreateCommand("List");
 	auto pListCommand = dynamic_cast<CListCommand*>(command.get());
@@ -161,7 +201,12 @@ TEST(CDocumentCommandFactoryTest, CreateHelpCommand)
 {
 	std::ostringstream oss;
 	auto mockDoc = std::make_shared<MockDocument>();
-	CDocumentCommandFactory commandFactory(mockDoc, oss, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		oss,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	auto command = commandFactory.CreateCommand("Help");
 	auto pHelpCommand = dynamic_cast<CHelpCommand*>(command.get());
@@ -172,7 +217,12 @@ TEST(CDocumentCommandFactoryTest, CreateUndoCommand)
 {
 	std::ostream nullStream(nullptr);
 	auto mockDoc = std::make_shared<MockDocument>();
-	CDocumentCommandFactory commandFactory(mockDoc, nullStream, std::make_shared<MockCommandHistory>());
+	CDocumentCommandFactory commandFactory(
+		mockDoc,
+		nullStream,
+		std::make_shared<MockCommandHistory>(),
+		std::make_shared<MockCommandHistory>()
+	);
 
 	auto command = commandFactory.CreateCommand("Undo");
 	auto pUndoCommand = dynamic_cast<CUndoCommand*>(command.get());

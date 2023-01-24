@@ -26,8 +26,10 @@ public:
 	void ListenAndServe()
 	{
 		auto doc = std::make_shared<CHtmlDocument>(m_fileStorage);
+		auto redoCommandHistory = std::make_shared<CCommandHistory>();
 		auto undoCommandHistory = std::make_shared<CCommandHistory>();
-		auto commandFactory = std::make_shared<CDocumentCommandFactory>(doc, m_out, undoCommandHistory);
+		auto commandFactory = std::make_shared<CDocumentCommandFactory>(
+			doc, m_out, undoCommandHistory, redoCommandHistory);
 
 		for (std::string line; std::getline(m_in, line);)
 		{

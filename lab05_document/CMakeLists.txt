@@ -48,7 +48,9 @@ add_executable(
         src/lib/command/CCommandHistory.h
         src/lib/command/CUndoCommand.h
         src/lib/document/node/NodeType.h
-        src/lib/command/CSaveToHistoryCommandDecorator.h)
+        src/lib/command/CSaveToHistoryCommandDecorator.h
+        src/lib/command/CRedoCommand.h
+)
 
 add_executable(
         lab05_document_test
@@ -85,6 +87,7 @@ add_executable(
         src/lib/command/CUndoCommand.h
         src/lib/document/node/NodeType.h
         src/lib/command/CSaveToHistoryCommandDecorator.h
+        src/lib/command/CRedoCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp

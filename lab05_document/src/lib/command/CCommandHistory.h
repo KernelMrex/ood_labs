@@ -24,9 +24,19 @@ public:
 
 	std::shared_ptr<ICommand> Pop() override
 	{
+		if (m_history.empty())
+		{
+			return nullptr;
+		}
+
 		std::shared_ptr<ICommand> cmd(m_history.back());
 		m_history.pop_back();
 		return cmd;
+	}
+
+	void Clear() override
+	{
+		m_history.clear();
 	}
 
 private:

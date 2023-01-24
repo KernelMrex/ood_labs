@@ -11,6 +11,8 @@ public:
 
 	virtual std::shared_ptr<ICommand> Pop() = 0;
 
+	virtual void Clear() = 0;
+
 	~ICommandHistory() = default;
 };
 

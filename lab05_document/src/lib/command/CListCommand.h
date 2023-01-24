@@ -25,6 +25,9 @@ public:
 		}
 	}
 
+	void Undo() override
+	{}
+
 private:
 	std::shared_ptr<IDocument> m_doc;
 	std::ostream& m_out;

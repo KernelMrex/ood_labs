@@ -19,6 +19,9 @@ public:
 		m_doc->Save(m_path);
 	}
 
+	void Undo() override
+	{}
+
 private:
 	std::shared_ptr<IDocument> m_doc;
 	CPath m_path;

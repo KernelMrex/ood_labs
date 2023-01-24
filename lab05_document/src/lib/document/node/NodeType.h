@@ -1,0 +1,10 @@
+#ifndef LAB05_DOCUMENT_NODETYPE_H
+#define LAB05_DOCUMENT_NODETYPE_H
+
+enum class NodeType
+{
+	IMAGE,
+	PARAGRAPH,
+};
+
+#endif // LAB05_DOCUMENT_NODETYPE_H

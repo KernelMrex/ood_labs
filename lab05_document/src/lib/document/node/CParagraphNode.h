@@ -15,6 +15,12 @@ public:
 	void Render(IRenderer& renderer) const override;
 
 	[[nodiscard]]
+	NodeType Type() const override
+	{
+		return NodeType::PARAGRAPH;
+	}
+
+	[[nodiscard]]
 	std::string Text() const
 	{
 		return m_text;

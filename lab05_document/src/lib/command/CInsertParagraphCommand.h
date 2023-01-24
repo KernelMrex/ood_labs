@@ -25,6 +25,11 @@ public:
 		m_doc->InsertParagraph(m_text, m_position);
 	}
 
+	void Undo() override
+	{
+		m_doc->DeleteNode(m_position.has_value() ? *m_position : (m_doc->GetNodesCount() - 1));
+	}
+
 private:
 	std::shared_ptr<IDocument> m_doc;
 	std::string m_text;

@@ -1,8 +1,10 @@
 #ifndef LAB05_DOCUMENT_CAPP_H
 #define LAB05_DOCUMENT_CAPP_H
 
-#include "command/ICommand.h"
+#include "command/CCommandHistory.h"
 #include "command/CDocumentCommandFactory.h"
+#include "command/ICommand.h"
+#include "command/ICommandHistory.h"
 #include "document/CHtmlDocument.h"
 #include <istream>
 #include <memory>
@@ -24,7 +26,8 @@ public:
 	void ListenAndServe()
 	{
 		auto doc = std::make_shared<CHtmlDocument>(m_fileStorage);
-		auto commandFactory = std::make_shared<CDocumentCommandFactory>(doc, m_out);
+		auto undoCommandHistory = std::make_shared<CCommandHistory>();
+		auto commandFactory = std::make_shared<CDocumentCommandFactory>(doc, m_out, undoCommandHistory);
 
 		for (std::string line; std::getline(m_in, line);)
 		{
@@ -33,7 +36,7 @@ public:
 				break;
 			}
 
-			auto command = commandFactory->CreateCommand(line);
+			std::shared_ptr<ICommand> command(commandFactory->CreateCommand(line).release());
 			if (command == nullptr)
 			{
 				PrintInvalidCommandError();

@@ -24,6 +24,9 @@ public:
 			  << "Save <path>" << std::endl;
 	}
 
+	void Undo() override
+	{}
+
 private:
 	std::ostream& m_out;
 };

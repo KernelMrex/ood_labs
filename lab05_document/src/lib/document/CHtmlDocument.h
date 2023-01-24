@@ -90,7 +90,7 @@ public:
 
 		file << "<!doctype html>"
 				"<html>"
-				"<head><title>Our Funky HTML Page</title></head>"
+				"<head><title>" << GetTitle() << "</title></head>"
 				"<body>";
 
 		CHtmlRenderer htmlRenderer(file);

@@ -28,6 +28,11 @@ public:
 		m_doc->InsertImage(m_path, m_width, m_height, m_position);
 	}
 
+	void Undo() override
+	{
+		m_doc->DeleteNode(m_position.has_value() ? *m_position : m_doc->GetNodesCount());
+	}
+
 private:
 	std::shared_ptr<IDocument> m_doc;
 	CPath m_path;

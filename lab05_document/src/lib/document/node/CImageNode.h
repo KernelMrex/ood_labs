@@ -20,6 +20,12 @@ public:
 	void Render(IRenderer& renderer) const override;
 
 	[[nodiscard]]
+	NodeType Type() const override
+	{
+		return NodeType::IMAGE;
+	}
+
+	[[nodiscard]]
 	const CPath& Path() const
 	{
 		return m_path;

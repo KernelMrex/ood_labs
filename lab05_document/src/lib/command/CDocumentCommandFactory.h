@@ -14,17 +14,33 @@
 #include "CInsertParagraphCommand.h"
 #include "CListCommand.h"
 #include "CSaveCommand.h"
+#include "CSaveToHistoryCommandDecorator.h"
 #include "CSetTitleCommand.h"
+#include "CUndoCommand.h"
 #include "ICommandFactory.h"
-
-using CommandCreationHandler = std::function<std::unique_ptr<ICommand>(const std::shared_ptr<IDocument>&, std::ostream&, const std::string&)>;
 
 class CDocumentCommandFactory : public ICommandFactory
 {
 public:
-	CDocumentCommandFactory(std::shared_ptr<IDocument> doc, std::ostream& out)
+	CDocumentCommandFactory(
+		std::shared_ptr<IDocument> doc,
+		std::ostream& out,
+		std::shared_ptr<ICommandHistory> commandHistory)
 		: m_doc(std::move(doc))
-		, m_out(out) {};
+		, m_out(out)
+		, m_commandHistory(std::move(commandHistory))
+	{
+		m_commandHandlerMap = std::map<std::string, std::function<std::unique_ptr<ICommand>(const std::string&)>>{
+			{ "InsertParagraph", [this](const std::string& description) { return CreateInsertParagraphCommand(description); } },
+			{ "InsertImage", [this](const std::string& description) { return CreateInsertImageCommand(description); } },
+			{ "DeleteNode", [this](const std::string& description) { return CreateDeleteNodeCommand(description); } },
+			{ "Save", [this](const std::string& description) { return CreateSaveCommand(description); } },
+			{ "SetTitle", [this](const std::string& description) { return CreateSetTitleCommand(description); } },
+			{ "List", [this](const std::string& description) { return CreateListCommand(description); } },
+			{ "Help", [this](const std::string& description) { return CreateHelpCommand(description); } },
+			{ "Undo",  [this](const std::string& description) { return CreateUndoCommand(description); } }
+		};
+	};
 
 	[[nodiscard]]
 	std::unique_ptr<ICommand> CreateCommand(const std::string& description) const override
@@ -34,8 +50,8 @@ public:
 		std::string commandName;
 		iss >> commandName;
 
-		auto handler = m_commandHandler.find(commandName);
-		if (handler == m_commandHandler.end())
+		auto handler = m_commandHandlerMap.find(commandName);
+		if (handler == m_commandHandlerMap.end())
 		{
 			return nullptr;
 		}
@@ -43,36 +59,40 @@ public:
 		std::ostringstream oss;
 		oss << iss.rdbuf();
 
-		return handler->second(m_doc, m_out, Trim(oss.str()));
+		return handler->second(Trim(oss.str()));
 	}
 
 private:
 	std::shared_ptr<IDocument> m_doc;
 	std::ostream& m_out;
+	std::shared_ptr<ICommandHistory> m_commandHistory;
+	std::map<std::string, std::function<std::unique_ptr<ICommand>(const std::string&)>> m_commandHandlerMap;
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateInsertParagraphCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
-	{
+	std::unique_ptr<ICommand> CreateInsertParagraphCommand(const std::string& description) {
 		std::istringstream iss(description);
 
 		std::string rawPos;
 		iss >> rawPos;
-		std::optional<std::size_t> position = (rawPos == "end") ? std::nullopt : std::optional{std::stoul(rawPos)};
+		std::optional<std::size_t> position = (rawPos == "end") ? std::nullopt : std::optional{ std::stoul(rawPos) };
 
 		std::ostringstream textOSS;
 		textOSS << iss.rdbuf();
 
-		return std::make_unique<CInsertParagraphCommand>(doc, Trim(textOSS.str()), position);
+		return std::make_unique<CSaveToHistoryCommandDecorator>(
+			std::make_shared<CInsertParagraphCommand>(m_doc, Trim(textOSS.str()), position),
+			m_commandHistory
+		);
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateInsertImageCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
+	std::unique_ptr<ICommand> CreateInsertImageCommand(const std::string& description)
 	{
 		std::istringstream iss(description);
 
 		std::string rawPos;
 		iss >> rawPos;
-		std::optional<std::size_t> position = (rawPos == "end") ? std::nullopt : std::optional{std::stoul(rawPos)};
+		std::optional<std::size_t> position = (rawPos == "end") ? std::nullopt : std::optional{ std::stoul(rawPos) };
 
 		unsigned int width, height;
 		iss >> width >> height;
@@ -80,53 +100,58 @@ private:
 		std::ostringstream rawPathOSS;
 		rawPathOSS << iss.rdbuf();
 
-		return std::make_unique<CInsertImageCommand>(doc, CPath(Trim(rawPathOSS.str())), width, height, position);
+		return std::make_unique<CSaveToHistoryCommandDecorator>(
+			std::make_unique<CInsertImageCommand>(m_doc, CPath(Trim(rawPathOSS.str())), width, height, position),
+			m_commandHistory
+		);
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateDeleteNodeCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
+	std::unique_ptr<ICommand> CreateDeleteNodeCommand(const std::string& description)
 	{
 		std::istringstream iss(description);
 
 		std::size_t index;
 		iss >> index;
 
-		return std::make_unique<CDeleteNodeCommand>(doc, index);
+		return std::make_unique<CSaveToHistoryCommandDecorator>(
+			std::make_unique<CDeleteNodeCommand>(m_doc, index),
+			m_commandHistory
+		);
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateSaveCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
+	std::unique_ptr<ICommand> CreateSaveCommand(const std::string& description)
 	{
-		return std::make_unique<CSaveCommand>(doc, CPath(description));
+		return std::make_unique<CSaveCommand>(m_doc, CPath(description));
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateSetTitleCommand(const std::shared_ptr<IDocument>& doc, std::ostream& _, const std::string& description)
+	std::unique_ptr<ICommand> CreateSetTitleCommand(const std::string& description)
 	{
-		return std::make_unique<CSetTitleCommand>(doc, description);
+		return std::make_unique<CSaveToHistoryCommandDecorator>(
+			std::make_unique<CSetTitleCommand>(m_doc, description),
+			m_commandHistory
+		);
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateListCommand(const std::shared_ptr<IDocument>& doc, std::ostream& out, const std::string& _)
+	std::unique_ptr<ICommand> CreateListCommand(const std::string& _)
 	{
-		return std::make_unique<CListCommand>(doc, out);
+		return std::make_unique<CListCommand>(m_doc, m_out);
 	}
 
 	[[nodiscard]]
-	static std::unique_ptr<ICommand> CreateHelpCommand(const std::shared_ptr<IDocument>& _0, std::ostream& out, const std::string& _1)
+	std::unique_ptr<ICommand> CreateHelpCommand(const std::string& _)
 	{
-		return std::make_unique<CHelpCommand>(out);
+		return std::make_unique<CHelpCommand>(m_out);
 	}
 
-	inline static std::map<std::string, CommandCreationHandler> m_commandHandler {
-		{ "InsertParagraph", CreateInsertParagraphCommand },
-		{ "InsertImage", CreateInsertImageCommand },
-		{ "DeleteNode", CreateDeleteNodeCommand },
-		{ "Save", CreateSaveCommand },
-		{ "SetTitle", CreateSetTitleCommand },
-		{ "List", CreateListCommand },
-		{ "Help", CreateHelpCommand },
-	};
+	[[nodiscard]]
+	std::unique_ptr<ICommand> CreateUndoCommand(const std::string& _)
+	{
+		return std::make_unique<CUndoCommand>(m_commandHistory);
+	}
 };
 
 #endif // LAB05_DOCUMENT_CDOCUMENTCOMMANDFACTORY_H

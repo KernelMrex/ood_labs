@@ -1,7 +1,7 @@
 #include "CParagraphNode.h"
-#include "../render/IRenderer.h"
+#include "INodeVisitor.h"
 
-void CParagraphNode::Render(IRenderer& renderer) const
+void CParagraphNode::Render(INodeVisitor& renderer) const
 {
-	renderer.RenderParagraph(*this);
+	renderer.Visit(*this);
 }

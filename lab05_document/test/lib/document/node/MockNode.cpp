@@ -6,6 +6,6 @@
 class MockNode : public INode
 {
 public:
-	MOCK_METHOD(void, Render, (IRenderer& renderer), (override, const));
+	MOCK_METHOD(void, Render, (INodeVisitor& renderer), (override, const));
 	MOCK_METHOD(NodeType, Type, (), (override, const));
 };

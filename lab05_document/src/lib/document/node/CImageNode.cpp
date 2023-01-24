@@ -1,7 +1,7 @@
 #include "CImageNode.h"
-#include "../render/IRenderer.h"
+#include "INodeVisitor.h"
 
-void CImageNode::Render(IRenderer& renderer) const
+void CImageNode::Render(INodeVisitor& renderer) const
 {
-	renderer.RenderImage(*this);
+	renderer.Visit(*this);
 }

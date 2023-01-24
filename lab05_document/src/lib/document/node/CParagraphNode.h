@@ -12,7 +12,7 @@ public:
 	{
 	}
 
-	void Render(IRenderer& renderer) const override;
+	void Render(INodeVisitor& renderer) const override;
 
 	[[nodiscard]]
 	NodeType Type() const override

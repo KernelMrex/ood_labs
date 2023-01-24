@@ -15,7 +15,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(
         lab05_document
         src/main.cpp
-        src/lib/document/render/IRenderer.h
+        src/lib/document/node/INodeVisitor.h
         src/lib/document/node/INode.h
         src/lib/document/node/CImageNode.h
         src/lib/document/node/CImageNode.cpp
@@ -52,7 +52,7 @@ add_executable(
 
 add_executable(
         lab05_document_test
-        src/lib/document/render/IRenderer.h
+        src/lib/document/node/INodeVisitor.h
         src/lib/document/node/INode.h
         src/lib/document/node/CImageNode.h
         src/lib/document/node/CImageNode.cpp

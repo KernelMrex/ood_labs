@@ -3,12 +3,12 @@
 
 #include "NodeType.h"
 
-class IRenderer;
+class INodeVisitor;
 
 class INode
 {
 public:
-	virtual void Render(IRenderer& renderer) const = 0;
+	virtual void Render(INodeVisitor& renderer) const = 0;
 
 	[[nodiscard]]
 	virtual NodeType Type() const = 0;

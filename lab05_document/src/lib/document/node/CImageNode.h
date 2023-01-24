@@ -4,8 +4,8 @@
 #include <utility>
 
 #include "../../file/CPath.h"
-#include "../render/IRenderer.h"
 #include "INode.h"
+#include "INodeVisitor.h"
 
 class CImageNode : public INode
 {
@@ -17,7 +17,7 @@ public:
 	{
 	}
 
-	void Render(IRenderer& renderer) const override;
+	void Render(INodeVisitor& renderer) const override;
 
 	[[nodiscard]]
 	NodeType Type() const override

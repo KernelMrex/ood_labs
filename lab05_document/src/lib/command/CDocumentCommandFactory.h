@@ -14,6 +14,7 @@
 #include "CInsertParagraphCommand.h"
 #include "CListCommand.h"
 #include "CRedoCommand.h"
+#include "CReplaceTextCommand.h"
 #include "CSaveCommand.h"
 #include "CSaveToHistoryCommandDecorator.h"
 #include "CSetTitleCommand.h"
@@ -43,6 +44,7 @@ public:
 			{ "Help", [this](const std::string& description) { return CreateHelpCommand(description); } },
 			{ "Undo",  [this](const std::string& description) { return CreateUndoCommand(description); } },
 			{ "Redo", [this](const std::string& description) { return CreateRedoCommand(description); } },
+			{ "ReplaceText", [this](const std::string& description) { return CreateReplaceTextCommand(description); } }
 		};
 	};
 
@@ -162,6 +164,22 @@ private:
 	std::unique_ptr<ICommand> CreateRedoCommand(const std::string&)
 	{
 		return std::make_unique<CRedoCommand>(m_commandHistory, m_redoCommandHistory);
+	}
+
+	[[nodiscard]]
+	std::unique_ptr<ICommand> CreateReplaceTextCommand(const std::string& description) {
+		std::istringstream iss(description);
+
+		std::size_t position;
+		iss >> position;
+
+		std::ostringstream textOSS;
+		textOSS << iss.rdbuf();
+
+		return std::make_unique<CSaveToHistoryCommandDecorator>(
+			std::make_shared<CReplaceTextCommand>(m_doc, position, Trim(textOSS.str())),
+			m_commandHistory,
+			m_redoCommandHistory);
 	}
 };
 

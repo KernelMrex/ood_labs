@@ -113,7 +113,7 @@ private:
 
 	void InsertNode(const std::shared_ptr<INode>& node, std::optional<std::size_t> position = std::nullopt)
 	{
-		if (!position.has_value())
+		if (!position.has_value() || (position.value() == 0 && m_nodes.empty()))
 		{
 			m_nodes.push_back(node);
 			return;

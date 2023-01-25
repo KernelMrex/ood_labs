@@ -228,3 +228,8 @@ TEST(CDocumentCommandFactoryTest, CreateUndoCommand)
 	auto pUndoCommand = dynamic_cast<CUndoCommand*>(command.get());
 	ASSERT_NE(pUndoCommand, nullptr);
 }
+
+TEST(CDocumentCommandFactoryTest, CreateReplaceTextCommand)
+{
+	// TODO
+}

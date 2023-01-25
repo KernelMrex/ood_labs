@@ -20,10 +20,10 @@ public:
 
 	void Execute() override
 	{
+		m_wrappee->Execute();
 		m_commandHistory->Push(std::make_shared<CSaveToHistoryCommandDecorator>(
 			m_wrappee, m_commandHistory, m_redoCommandHistory));
 		m_redoCommandHistory->Clear();
-		m_wrappee->Execute();
 	}
 
 	void Undo() override

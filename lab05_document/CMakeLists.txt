@@ -50,6 +50,7 @@ add_executable(
         src/lib/document/node/NodeType.h
         src/lib/command/CSaveToHistoryCommandDecorator.h
         src/lib/command/CRedoCommand.h
+        src/lib/command/CReplaceTextCommand.h
 )
 
 add_executable(
@@ -88,6 +89,7 @@ add_executable(
         src/lib/document/node/NodeType.h
         src/lib/command/CSaveToHistoryCommandDecorator.h
         src/lib/command/CRedoCommand.h
+        src/lib/command/CReplaceTextCommand.h
 
         test/lib/document/render/CListRendererTest.cpp
         test/lib/document/render/CHtmlRendererTest.cpp
@@ -108,6 +110,7 @@ add_executable(
         test/lib/document/node/MockNode.cpp
         test/lib/command/CHelpCommandTest.cpp
         test/lib/command/MockCommandHistory.cpp
+        test/lib/command/CReplaceTextCommandTest.cpp
 )
 
 target_link_libraries(lab05_document_test gtest gtest_main gmock)

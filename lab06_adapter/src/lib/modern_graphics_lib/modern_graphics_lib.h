@@ -57,7 +57,7 @@ public:
 			throw std::logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
 		}
 
-		m_out << boost::format(R"(  <line fromX="%1%" fromY="%2" toX="%3%" toY="%4%"/>)")
+		m_out << (boost::format(R"(  <line fromX="%1%" fromY="%2%" toX="%3%" toY="%4%"/>)") % start.x % start.y % end.x % end.y)
 			  << std::endl;
 	}
 

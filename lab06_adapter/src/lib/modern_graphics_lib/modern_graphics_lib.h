@@ -1,17 +1,21 @@
 #ifndef GRAPHICS_LIB_H
 #define GRAPHICS_LIB_H
 
-// Пространство имен современной графической библиотеки (недоступно для изменения)
-#include <iostream>
 #include <boost/format.hpp>
+#include <iostream>
 
+// Пространство имен современной графической библиотеки (недоступно для изменения)
 namespace modern_graphics_lib
 {
 
 class CPoint
 {
 public:
-	CPoint(int x, int y) :x(x), y(y) {}
+	CPoint(int x, int y)
+		: x(x)
+		, y(y)
+	{
+	}
 
 	int x;
 	int y;
@@ -21,7 +25,8 @@ public:
 class CModernGraphicsRenderer
 {
 public:
-	CModernGraphicsRenderer(std::ostream & strm) : m_out(strm)
+	CModernGraphicsRenderer(std::ostream& strm)
+		: m_out(strm)
 	{
 	}
 
@@ -45,7 +50,7 @@ public:
 	}
 
 	// Выполняет рисование линии
-	void DrawLine(const CPoint & start, const CPoint & end)
+	void DrawLine(const CPoint& start, const CPoint& end)
 	{
 		if (!m_drawing)
 		{
@@ -68,10 +73,10 @@ public:
 	}
 
 private:
-	std::ostream & m_out;
+	std::ostream& m_out;
 	bool m_drawing = false;
 };
 
-}
+} // namespace modern_graphics_lib
 
 #endif // GRAPHICS_LIB_H

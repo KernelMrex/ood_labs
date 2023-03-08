@@ -1,20 +1,18 @@
 #ifndef SHAPE_DRAWING_LIB_H
 #define SHAPE_DRAWING_LIB_H
 
-// Пространство имен библиотеки для рисования фигур (использует graphics_lib)
-// Код библиотеки недоступен для изменения
 #include "../graphics_lib/graphics_lib.h"
 
+// Пространство имен библиотеки для рисования фигур (использует graphics_lib)
+// Код библиотеки недоступен для изменения
 namespace shape_drawing_lib
 {
-
 
 struct Point
 {
 	int x;
 	int y;
 };
-
 
 // Интерфейс объектов, которые могут быть нарисованы на холсте из graphics_lib
 class ICanvasDrawable
@@ -24,7 +22,6 @@ public:
 
 	virtual ~ICanvasDrawable() = default;
 };
-
 
 class CTriangle : public ICanvasDrawable
 {
@@ -43,7 +40,6 @@ private:
 	// TODO: дописать приватную часть
 };
 
-
 class CRectangle : public ICanvasDrawable
 {
 public:
@@ -60,7 +56,6 @@ public:
 private:
 	// TODO: дописать приватную часть
 };
-
 
 // Художник, способный рисовать ICanvasDrawable-объекты на ICanvas
 class CCanvasPainter
@@ -79,7 +74,6 @@ public:
 private:
 	// TODO: дописать приватную часть
 };
-
 
 } // namespace shape_drawing_lib
 

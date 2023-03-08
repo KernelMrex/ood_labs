@@ -4,11 +4,12 @@
 #include "IDesigner.h"
 #include "IShapeFactory.h"
 #include <istream>
+#include <utility>
 
 class CDesigner : public IDesigner
 {
 public:
-	explicit CDesigner(std::unique_ptr<IShapeFactory> shapeFactory)
+	explicit CDesigner(std::shared_ptr<IShapeFactory> shapeFactory)
 		: m_shapeFactory(std::move(shapeFactory))
 	{
 	}
@@ -30,7 +31,7 @@ public:
 	}
 
 private:
-	std::unique_ptr<IShapeFactory> m_shapeFactory;
+	std::shared_ptr<IShapeFactory> m_shapeFactory;
 };
 
 #endif // LAB04_PAINTER_CDESIGNER_H

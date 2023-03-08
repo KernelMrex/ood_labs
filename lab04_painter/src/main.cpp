@@ -8,7 +8,6 @@
 
 int main()
 {
-	CShapeFactory shapeFactory;
 	CDesigner designer(std::make_unique<CShapeFactory>());
 
 	auto draft = designer.CreateDraft(std::cin);

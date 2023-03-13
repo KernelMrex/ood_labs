@@ -14,7 +14,8 @@ void PaintPicture(shape_drawing_lib::CCanvasPainter & painter)
 	CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
 	CRectangle rectangle({ 30, 40 }, 18, 24);
 
-	// TODO: нарисовать прямоугольник и треугольник при помощи painter
+	painter.Draw(rectangle);
+	painter.Draw(triangle);
 }
 
 

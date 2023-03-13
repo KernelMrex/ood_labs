@@ -18,7 +18,7 @@ public:
 	void MoveTo(int x, int y) override
 	{
 		m_cursorPosition.x = x;
-		m_cursorPosition.y = x;
+		m_cursorPosition.y = y;
 	}
 
 	void LineTo(int x, int y) override

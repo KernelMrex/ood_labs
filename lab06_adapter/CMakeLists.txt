@@ -40,6 +40,7 @@ add_executable(
         test/unit/lib/graphics_lib/CanvasTest.cpp
         test/unit/lib/modern_graphics_lib/CModernGraphicsRendererTest.cpp
         src/app/graphics/CModernGraphicsRendererAdapter.h
+        test/unit/app/graphics/ModernGraphicsAdapterTest.cpp
 )
 target_link_libraries(lab06_adapter_test LINK_PUBLIC gtest gtest_main gmock ${Boost_LIBRARIES})
 # unit_tests:end

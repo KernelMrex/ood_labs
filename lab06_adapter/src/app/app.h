@@ -5,11 +5,12 @@
 #include "../lib/graphics_lib/graphics_lib.h"
 #include "../lib/modern_graphics_lib/modern_graphics_lib.h"
 #include "../lib/shape_drawing_lib/shape_drawing_lib.h"
+#include "graphics/CModernGraphicsRendererAdapter.h"
 
 namespace app
 {
 
-void PaintPicture(shape_drawing_lib::CCanvasPainter & painter)
+void PaintPicture(shape_drawing_lib::CCanvasPainter& painter)
 {
 	using namespace shape_drawing_lib;
 
@@ -19,7 +20,6 @@ void PaintPicture(shape_drawing_lib::CCanvasPainter & painter)
 	painter.Draw(rectangle);
 	painter.Draw(triangle);
 }
-
 
 void PaintPictureOnCanvas()
 {
@@ -31,13 +31,16 @@ void PaintPictureOnCanvas()
 void PaintPictureOnModernGraphicsRenderer()
 {
 	modern_graphics_lib::CModernGraphicsRenderer renderer(std::cout);
-	(void) &renderer; // устраняем предупреждение о неиспользуемой переменной
+	renderer.BeginDraw();
 
-	// TODO: при помощи существующей функции PaintPicture() нарисовать
-	// картину на renderer
-	// Подсказка: используйте паттерн "Адаптер"
+	app::CModernGraphicsRendererAdapter modernGraphicsAdapter(renderer);
+
+	shape_drawing_lib::CCanvasPainter painter(modernGraphicsAdapter);
+	PaintPicture(painter);
+
+	renderer.EndDraw();
 }
 
-}
+} // namespace app
 
 #endif // APP_H

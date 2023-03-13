@@ -2,7 +2,7 @@
 
 int main()
 {
-	std::cout << "Should we use new API (y)?";
+	std::cout << "Should we use new API (y/n)? ";
 	std::string userInput;
 	if (getline(std::cin, userInput) && (userInput == "y" || userInput == "Y"))
 	{
@@ -13,5 +13,5 @@ int main()
 		app::PaintPictureOnCanvas();
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }

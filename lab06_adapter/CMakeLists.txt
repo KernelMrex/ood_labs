@@ -27,6 +27,7 @@ add_executable(
         src/lib/modern_graphics_lib/modern_graphics_lib.h
         src/lib/shape_drawing_lib/shape_drawing_lib.h
         src/app/app.h
+        src/app/graphics/CModernGraphicsRendererAdapter.h
 )
 target_link_libraries(lab06_adapter LINK_PUBLIC ${Boost_LIBRARIES})
 # app:end
@@ -38,6 +39,7 @@ add_executable(
         src/lib/modern_graphics_lib/modern_graphics_lib.h
         test/unit/lib/graphics_lib/CanvasTest.cpp
         test/unit/lib/modern_graphics_lib/CModernGraphicsRendererTest.cpp
+        src/app/graphics/CModernGraphicsRendererAdapter.h
 )
 target_link_libraries(lab06_adapter_test LINK_PUBLIC gtest gtest_main gmock ${Boost_LIBRARIES})
 # unit_tests:end

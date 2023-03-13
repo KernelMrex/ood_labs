@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_LIB_H
-#define GRAPHICS_LIB_H
+#ifndef MODERN_GRAPHICS_LIB_H
+#define MODERN_GRAPHICS_LIB_H
 
 #include <boost/format.hpp>
 #include <iostream>
@@ -79,4 +79,4 @@ private:
 
 } // namespace modern_graphics_lib
 
-#endif // GRAPHICS_LIB_H
+#endif // MODERN_GRAPHICS_LIB_H

@@ -2,6 +2,8 @@
 #define APP_H
 
 // Пространство имен приложения (доступно для модификации)
+#include "../lib/graphics_lib/graphics_lib.h"
+#include "../lib/modern_graphics_lib/modern_graphics_lib.h"
 #include "../lib/shape_drawing_lib/shape_drawing_lib.h"
 
 namespace app
@@ -24,6 +26,16 @@ void PaintPictureOnCanvas()
 	graphics_lib::CCanvas simpleCanvas;
 	shape_drawing_lib::CCanvasPainter painter(simpleCanvas);
 	PaintPicture(painter);
+}
+
+void PaintPictureOnModernGraphicsRenderer()
+{
+	modern_graphics_lib::CModernGraphicsRenderer renderer(std::cout);
+	(void) &renderer; // устраняем предупреждение о неиспользуемой переменной
+
+	// TODO: при помощи существующей функции PaintPicture() нарисовать
+	// картину на renderer
+	// Подсказка: используйте паттерн "Адаптер"
 }
 
 }

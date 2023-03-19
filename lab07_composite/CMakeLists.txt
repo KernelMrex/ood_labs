@@ -15,22 +15,45 @@ FetchContent_MakeAvailable(googletest)
 # googletest:end
 
 # boost:start
-#find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
-#include_directories(${Boost_INCLUDE_DIR})
+find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
 # boost:end
 
 # app:start
 add_executable(
         lab07_composite
         src/main.cpp
+        src/app/common/SPoint.h
+        src/app/common/SColor.h
+        src/app/common/SFrame.h
+        src/app/figure/style/CBorderStyle.h
+        src/app/figure/style/CFillStyle.h
+        src/app/figure/IFigure.h
+        src/app/figure/CPrimitive.h
+        src/app/figure/CEllipse.h
+        src/app/canvas/ICanvas.h
+        src/app/canvas/CSvgCanvas.h
 )
-#target_link_libraries(lab06_adapter LINK_PUBLIC ${Boost_LIBRARIES})
+target_link_libraries(lab07_composite LINK_PUBLIC ${Boost_LIBRARIES})
 # app:end
 
 # unit_tests:start
-#add_executable(
-#        lab07_composite_test
-#)
-#target_link_libraries(lab06_adapter_test LINK_PUBLIC gtest gtest_main gmock ${Boost_LIBRARIES})
-#target_link_libraries(lab06_adapter_test LINK_PUBLIC gtest gtest_main gmock)
+add_executable(
+        lab07_composite_test
+        src/app/common/SPoint.h
+        src/app/common/SColor.h
+        src/app/common/SFrame.h
+        src/app/figure/style/CBorderStyle.h
+        src/app/figure/style/CFillStyle.h
+        src/app/figure/IFigure.h
+        src/app/figure/CPrimitive.h
+        src/app/figure/CEllipse.h
+        src/app/canvas/ICanvas.h
+        src/app/canvas/CSvgCanvas.h
+
+        test/unit/app/canvas/SvgCanvasTest.cpp
+        test/unit/app/canvas/MockCanvas.cpp
+        test/unit/app/figure/EllipseTest.cpp
+)
+target_link_libraries(lab07_composite_test LINK_PUBLIC gtest gtest_main gmock ${Boost_LIBRARIES})
 # unit_tests:end

@@ -8,9 +8,9 @@
 class ICanvas
 {
 public:
-	virtual void DrawLine(const SPoint& from, const SPoint& to) = 0;
+	virtual void DrawLine(const SPoint& from, const SPoint& to, const SColor& color, uint thickness) = 0;
 
-	virtual void FillPolygon(const std::vector<SPoint>& vertices, SColor color) = 0;
+	virtual void FillPolygon(const std::vector<SPoint>& vertices, const SColor& color) = 0;
 
 	virtual void DrawEllipse(const SPoint& center, uint verticalRadius, uint horizontalRadius, const SColor& color, uint thickness) = 0;
 

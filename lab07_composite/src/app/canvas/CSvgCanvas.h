@@ -4,6 +4,7 @@
 #include "ICanvas.h"
 #include <boost/format.hpp>
 #include <ostream>
+#include <sstream>
 
 class CSvgCanvas : public ICanvas
 {
@@ -52,14 +53,49 @@ public:
 		}
 	}
 
-	void DrawLine(const SPoint& from, const SPoint& to) override
+	void DrawLine(const SPoint& from, const SPoint& to, const SColor& color, uint thickness) override
 	{
-		// TODO
+		DrawingMustBeStarted();
+		m_out << "  "
+			  << (boost::format(R"fmt(<line x1="%1%" y1="%2%" x2="%3%" y2="%4%" stroke="rgba(%5%, %6%, %7%, %8%)" stroke-width="%9%"/>)fmt")
+					% from.x
+					% from.y
+					% to.x
+					% to.y
+					% +color.red
+					% +color.green
+					% +color.blue
+					% color.alpha
+					% thickness)
+			  << std::endl;
 	}
 
-	void FillPolygon(const std::vector<SPoint>& vertices, SColor color) override
+	void FillPolygon(const std::vector<SPoint>& vertices, const SColor& color) override
 	{
-		// TODO
+		DrawingMustBeStarted();
+		if (vertices.size() < 3)
+		{
+			throw std::logic_error("At least 3 vertices must be provided to fill polygon");
+		}
+
+		std::ostringstream pointsStream;
+
+		for (const auto& vertex : vertices)
+		{
+			pointsStream << vertex.x << "," << vertex.y << " ";
+		}
+
+		auto points = pointsStream.str();
+		points.pop_back();
+
+		m_out << "  "
+			  << (boost::format(R"fmt(<polygon points="%1%" fill="rgba(%2%, %3%, %4%, %5%)" stroke="none"/>)fmt")
+					 % points
+					 % +color.red
+					 % +color.green
+					 % +color.blue
+					 % color.alpha)
+			  << std::endl;
 	}
 
 	void DrawEllipse(const SPoint& center, uint verticalRadius, uint horizontalRadius, const SColor& color, uint thickness) override

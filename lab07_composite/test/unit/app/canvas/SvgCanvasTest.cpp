@@ -83,3 +83,70 @@ TEST(SvgCanvasTest, FillingEllipseCauseErrorIfDrawingWasNotStarted)
 
 	ASSERT_EQ("", oss.str());
 }
+
+TEST(SvgCanvasTest, CheckLineDrawing)
+{
+	std::ostringstream oss;
+
+	CSvgCanvas canvas(oss, 500, 400);
+	canvas.StartDraw();
+	canvas.DrawLine({ 0, 1 }, { 2, 3 }, SColor{ 12, 34, 56, 1.0 }, 4);
+	canvas.EndDraw();
+
+	std::string expected = "<svg height=\"400\" width=\"500\">\n"
+						   "  <line x1=\"0\" y1=\"1\" x2=\"2\" y2=\"3\" stroke=\"rgba(12, 34, 56, 1)\" stroke-width=\"4\"/>\n"
+						   "</svg>\n";
+
+	ASSERT_EQ(expected, oss.str());
+}
+
+TEST(SvgCanvasTest, LineDrawingCauseErrorIfDrawingWasNotStarted)
+{
+	std::ostringstream oss;
+	ASSERT_THROW({
+		CSvgCanvas canvas(oss, 500, 400);
+		canvas.DrawLine({ 0, 1 }, { 2, 3 }, SColor{ 12, 34, 56, 1.0 }, 4);;
+	}, std::logic_error);
+
+	ASSERT_EQ("", oss.str());
+}
+
+TEST(SvgCanvasTest, CheckPolygonFilling)
+{
+	std::ostringstream oss;
+
+	CSvgCanvas canvas(oss, 500, 400);
+	canvas.StartDraw();
+
+	canvas.FillPolygon(std::vector<SPoint>{ { 10, 20 }, { 15, 25 }, { 25, 40 } }, SColor{ 12, 34, 56, 1.0 });
+
+	canvas.EndDraw();
+
+	std::string expected = "<svg height=\"400\" width=\"500\">\n"
+						   "  <polygon points=\"10,20 15,25 25,40\" fill=\"rgba(12, 34, 56, 1)\" stroke=\"none\"/>\n"
+						   "</svg>\n";
+
+	ASSERT_EQ(expected, oss.str());
+}
+
+TEST(SvgCanvasTest, PolygonFillingCauseErrorIfDrawingWasNotStarted)
+{
+	std::ostringstream oss;
+	ASSERT_THROW({
+		CSvgCanvas canvas(oss, 500, 400);
+		canvas.FillPolygon(std::vector<SPoint>{ { 10, 20 }, { 15, 25 }, { 25, 40 } }, SColor{ 12, 34, 56, 1.0 });
+	}, std::logic_error);
+
+	ASSERT_EQ("", oss.str());
+}
+
+TEST(SvgCanvasTest, PolygonFillingCauseErrorIfProvidedLessThan3Vertices)
+{
+	std::ostringstream oss;
+	ASSERT_THROW({
+		CSvgCanvas canvas(oss, 500, 400);
+		canvas.FillPolygon(std::vector<SPoint>{ { 10, 20 }, { 15, 25 } }, SColor{ 12, 34, 56, 1.0 });
+	}, std::logic_error);
+
+	ASSERT_EQ("", oss.str());
+}

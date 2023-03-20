@@ -2,6 +2,7 @@
 #define LAB07_COMPOSITE_CELLIPSE_H
 
 #include "CPrimitive.h"
+#include <cmath>
 
 class CEllipse : public CPrimitive
 {
@@ -11,7 +12,7 @@ public:
 		, m_verticalRadius(vr)
 		, m_horizontalRadius(hr)
 	{
-		Frame({ { { center.x - hr, center.y - vr }, { center.x + hr, center.y + vr } } });
+		CalculateFrame();
 	}
 
 	void Draw(ICanvas& canvas) const override
@@ -31,13 +32,24 @@ public:
 
 	void Resize(uint width, uint height) override
 	{
-		// TODO
+		auto xDeltaCoefficient = ((double) width) / ((double) m_horizontalRadius * 2);
+		auto yDeltaCoefficient = ((double) height) / ((double) m_verticalRadius * 2);
+
+		m_center = { static_cast<uint>(m_center.x * xDeltaCoefficient), static_cast<uint>(m_center.y * yDeltaCoefficient) };
+		m_horizontalRadius = static_cast<uint>(m_horizontalRadius * xDeltaCoefficient);
+		m_verticalRadius = static_cast<uint>(m_verticalRadius * yDeltaCoefficient);
+		CalculateFrame();
 	}
 
 private:
 	SPoint m_center;
 	uint m_verticalRadius;
 	uint m_horizontalRadius;
+
+	inline void CalculateFrame()
+	{
+		Frame({ { { m_center.x - m_horizontalRadius, m_center.y - m_verticalRadius }, { m_center.x + m_horizontalRadius, m_center.y + m_verticalRadius } } });
+	}
 };
 
 #endif // LAB07_COMPOSITE_CELLIPSE_H

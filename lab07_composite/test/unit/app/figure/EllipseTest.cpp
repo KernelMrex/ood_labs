@@ -39,3 +39,27 @@ TEST(EllipseTest, MustDrawAndFillEllipse)
 
 	ellipse.Draw(canvas);
 }
+
+TEST(EllipseTest, ResizingCircleTest)
+{
+	CEllipse ellipse({ 100, 100 }, 100, 100);
+	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 200, 200 }));
+
+	ellipse.Resize(250, 250);
+	ASSERT_TRUE(ellipse.Frame().has_value());
+	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 250, 250 }));
+}
+
+TEST(EllipseTest, ResizingEllipseTest)
+{
+	CEllipse ellipse({ 100, 200 }, 200, 100);
+	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 200, 400 }));
+
+	ellipse.Resize(200, 600);
+	ASSERT_TRUE(ellipse.Frame().has_value());
+	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 200, 600 }));
+}

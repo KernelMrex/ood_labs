@@ -34,6 +34,7 @@ add_executable(
         src/app/canvas/ICanvas.h
         src/app/canvas/CSvgCanvas.h
         src/app/figure/CFigureGroup.h
+        src/app/figure/CRectangle.h
 )
 target_link_libraries(lab07_composite LINK_PUBLIC ${Boost_LIBRARIES})
 # app:end
@@ -52,6 +53,7 @@ add_executable(
         src/app/canvas/ICanvas.h
         src/app/canvas/CSvgCanvas.h
         src/app/figure/CFigureGroup.h
+        src/app/figure/CRectangle.h
 
         test/unit/app/canvas/SvgCanvasTest.cpp
         test/unit/app/canvas/MockCanvas.cpp
@@ -59,6 +61,7 @@ add_executable(
         test/unit/app/figure/FigureGroupTest.cpp
         test/unit/app/common/Matchers.cpp
         test/unit/app/figure/MockFigure.cpp
+        test/unit/app/figure/RectangleTest.cpp
 )
 target_link_libraries(lab07_composite_test LINK_PUBLIC gtest gtest_main gmock ${Boost_LIBRARIES})
 # unit_tests:end

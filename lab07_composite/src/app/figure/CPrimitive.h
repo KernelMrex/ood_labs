@@ -33,22 +33,21 @@ public:
 	}
 
 	[[nodiscard]]
-	SFrame Frame() const
+	std::optional<SFrame> Frame() const override
 	{
 		return m_frame;
 	}
 
 protected:
-	void Frame(const SPoint& leftTop, const SPoint& rightBottom)
+	void Frame(std::optional<SFrame> frame)
 	{
-		m_frame.leftTop = leftTop;
-		m_frame.rightBottom = rightBottom;
+		m_frame = frame;
 	}
 
 private:
 	std::optional<CBorderStyle> m_borderStyle = std::nullopt;
 	std::optional<CFillStyle> m_fillStyle = std::nullopt;
-	SFrame m_frame;
+	std::optional<SFrame> m_frame = std::nullopt;
 };
 
 #endif // LAB07_COMPOSITE_CPRIMITIVE_H

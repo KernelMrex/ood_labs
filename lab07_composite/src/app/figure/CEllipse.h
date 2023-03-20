@@ -11,10 +11,10 @@ public:
 		, m_verticalRadius(vr)
 		, m_horizontalRadius(hr)
 	{
-		Frame({ center.x - hr, center.y - vr }, { center.x + hr, center.y + vr });
+		Frame({ { { center.x - hr, center.y - vr }, { center.x + hr, center.y + vr } } });
 	}
 
-	void Draw(ICanvas& canvas) override
+	void Draw(ICanvas& canvas) const override
 	{
 		auto borderStyle = BorderStyle();
 		if (borderStyle.has_value())

@@ -10,7 +10,9 @@ public:
 		: m_leftTop(leftTop)
 		, m_width(width)
 		, m_height(height)
-	{}
+	{
+		CalculateFrame();
+	}
 
 	void Draw(ICanvas& canvas) const override
 	{
@@ -46,12 +48,19 @@ public:
 
 	void Resize(uint width, uint height) override
 	{
-		// TODO
+		m_width = width;
+		m_height = height;
+		CalculateFrame();
 	}
 
 private:
 	SPoint m_leftTop;
 	uint m_width, m_height;
+
+	inline void CalculateFrame()
+	{
+		Frame({ { m_leftTop, { m_leftTop.x + m_width, m_leftTop.y + m_height } } });
+	}
 };
 
 #endif // LAB07_COMPOSITE_CRECTANGLE_H

@@ -64,3 +64,14 @@ TEST(RectangleTest, MustDrawAndFillRectangle)
 
 	rectangle.Draw(canvas);
 }
+
+TEST(RectangleTest, ResizingRectangleTest)
+{
+	CRectangle rectangle({0, 0}, 100, 150);
+	ASSERT_THAT(rectangle.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(rectangle.Frame()->rightBottom, PointsAreEqual(SPoint{ 100, 150 }));
+
+	rectangle.Resize(250, 500);
+	ASSERT_THAT(rectangle.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(rectangle.Frame()->rightBottom, PointsAreEqual(SPoint{ 250, 500 }));
+}

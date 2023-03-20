@@ -33,8 +33,11 @@ add_executable(
         src/app/figure/CEllipse.h
         src/app/canvas/ICanvas.h
         src/app/canvas/CSvgCanvas.h
+        src/app/canvas/IDrawable.h
         src/app/figure/CFigureGroup.h
         src/app/figure/CRectangle.h
+        src/app/slide/ISlide.h
+        src/app/slide/CSlide.h
 )
 target_link_libraries(lab07_composite LINK_PUBLIC ${Boost_LIBRARIES})
 # app:end
@@ -52,8 +55,11 @@ add_executable(
         src/app/figure/CEllipse.h
         src/app/canvas/ICanvas.h
         src/app/canvas/CSvgCanvas.h
+        src/app/canvas/IDrawable.h
         src/app/figure/CFigureGroup.h
         src/app/figure/CRectangle.h
+        src/app/slide/ISlide.h
+        src/app/slide/CSlide.h
 
         test/unit/app/canvas/SvgCanvasTest.cpp
         test/unit/app/canvas/MockCanvas.cpp

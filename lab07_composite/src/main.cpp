@@ -2,6 +2,8 @@
 #include "app/figure/CEllipse.h"
 #include "app/figure/CFigureGroup.h"
 #include "app/figure/CRectangle.h"
+#include "app/slide/CSlide.h"
+#include "app/slide/ISlide.h"
 #include <iostream>
 #include <memory>
 
@@ -58,20 +60,22 @@ std::unique_ptr<IFigure> GetBackground()
 	return background;
 }
 
+std::unique_ptr<ISlide> CreateSlide(uint width, uint height)
+{
+	auto slide = std::make_unique<CSlide>(width, height);
+	slide->Add(GetBackground());
+	slide->Add(GetSun());
+	slide->Add(GetCloud());
+	return slide;
+}
+
 int main()
 {
 	CSvgCanvas svgCanvas(std::cout, 500, 400);
+
 	svgCanvas.StartDraw();
-
-	auto background = GetBackground();
-	background->Draw(svgCanvas);
-
-	auto sun = GetSun();
-	sun->Draw(svgCanvas);
-
-	auto cloud = GetCloud();
-	cloud->Draw(svgCanvas);
-
+	auto slide = CreateSlide(500, 400);
+	slide->Draw(svgCanvas);
 	svgCanvas.EndDraw();
 
 	return EXIT_SUCCESS;

@@ -71,7 +71,8 @@ std::unique_ptr<ISlide> CreateSlide(uint width, uint height)
 	cloud2->Move(340, 30);
 	slide->Add(std::move(cloud2));
 	auto cloud3 = GetCloud();
-	cloud3->Move(240, 10);
+	cloud3->Move(180, 10);
+	cloud3->Resize(150, 100);
 	slide->Add(std::move(cloud3));
 	return slide;
 }

@@ -23,7 +23,24 @@ public:
 
 	void Resize(uint width, uint height) override
 	{
-		// TODO
+		auto currentFrame = Frame();
+		auto resizingCoefficientX = ((double) width) / ((double) (currentFrame->rightBottom.x - currentFrame->leftTop.x));
+		auto resizingCoefficientY = ((double) height) / ((double) (currentFrame->rightBottom.y - currentFrame->leftTop.y));
+
+		for (const auto& figure : m_figures)
+		{
+			auto figureFrame = figure->Frame();
+			auto figureAnchor = figureFrame->leftTop;
+			figure->Resize(
+				static_cast<uint>((figureFrame->rightBottom.x - figureFrame->leftTop.x) * resizingCoefficientX),
+				static_cast<uint>((figureFrame->rightBottom.y - figureFrame->leftTop.y) * resizingCoefficientY)
+			);
+			figure->Move(
+				static_cast<uint>(currentFrame->leftTop.x + (figureAnchor.x - currentFrame->leftTop.x) * resizingCoefficientX),
+				static_cast<uint>(currentFrame->leftTop.y + (figureAnchor.y - currentFrame->leftTop.y) * resizingCoefficientY)
+			);
+		}
+		CalculateFrame();
 	}
 
 	void Move(uint anchorX, uint anchorY) override

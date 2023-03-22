@@ -11,6 +11,8 @@ class IFigure : public IDrawable
 public:
 	virtual void Resize(uint width, uint height) = 0;
 
+	virtual void Move(uint anchorX, uint anchorY) = 0;
+
 	[[nodiscard]]
 	virtual std::optional<SFrame> Frame() const = 0;
 };

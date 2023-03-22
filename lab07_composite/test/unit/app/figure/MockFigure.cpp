@@ -8,5 +8,6 @@ class MockFigure : public IFigure
 public:
 	MOCK_METHOD(void, Draw, (ICanvas& canvas), (override, const));
 	MOCK_METHOD(void, Resize, (uint width, uint height), (override));
+	MOCK_METHOD(void, Move, (uint anchorX, uint anchorY), (override));
 	MOCK_METHOD(std::optional<SFrame>, Frame, (), (override, const));
 };

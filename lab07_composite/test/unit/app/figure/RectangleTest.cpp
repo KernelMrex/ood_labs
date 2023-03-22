@@ -75,3 +75,14 @@ TEST(RectangleTest, ResizingRectangleTest)
 	ASSERT_THAT(rectangle.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
 	ASSERT_THAT(rectangle.Frame()->rightBottom, PointsAreEqual(SPoint{ 250, 500 }));
 }
+
+TEST(RectangleTest, MovingTest)
+{
+	CRectangle rectangle({0, 0}, 100, 150);
+	ASSERT_THAT(rectangle.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(rectangle.Frame()->rightBottom, PointsAreEqual(SPoint{ 100, 150 }));
+
+	rectangle.Move(50, 100);
+	ASSERT_THAT(rectangle.Frame()->leftTop, PointsAreEqual(SPoint{ 50, 100 }));
+	ASSERT_THAT(rectangle.Frame()->rightBottom, PointsAreEqual(SPoint{ 150, 250 }));
+}

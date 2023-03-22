@@ -63,3 +63,14 @@ TEST(EllipseTest, ResizingEllipseTest)
 	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
 	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 200, 600 }));
 }
+
+TEST(EllipseTest, MovingEllipseTest)
+{
+	CEllipse ellipse({ 100, 200 }, 200, 100);
+	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 0, 0 }));
+	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 200, 400 }));
+
+	ellipse.Move(150, 250);
+	ASSERT_THAT(ellipse.Frame()->leftTop, PointsAreEqual(SPoint{ 150, 250 }));
+	ASSERT_THAT(ellipse.Frame()->rightBottom, PointsAreEqual(SPoint{ 350, 650 }));
+}

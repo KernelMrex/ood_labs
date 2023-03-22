@@ -65,7 +65,14 @@ std::unique_ptr<ISlide> CreateSlide(uint width, uint height)
 	auto slide = std::make_unique<CSlide>(width, height);
 	slide->Add(GetBackground());
 	slide->Add(GetSun());
-	slide->Add(GetCloud());
+	auto cloud1 = GetCloud();
+	slide->Add(std::move(cloud1));
+	auto cloud2 = GetCloud();
+	cloud2->Move(340, 30);
+	slide->Add(std::move(cloud2));
+	auto cloud3 = GetCloud();
+	cloud3->Move(240, 10);
+	slide->Add(std::move(cloud3));
 	return slide;
 }
 

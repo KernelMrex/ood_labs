@@ -46,6 +46,13 @@ public:
 		}
 	}
 
+	void Move(uint anchorX, uint anchorY) override
+	{
+		m_leftTop.x = anchorX;
+		m_leftTop.y = anchorY;
+		CalculateFrame();
+	}
+
 	void Resize(uint width, uint height) override
 	{
 		m_width = width;

@@ -26,6 +26,21 @@ public:
 		// TODO
 	}
 
+	void Move(uint anchorX, uint anchorY) override
+	{
+		auto currentAnchor = Frame()->leftTop;
+
+		long deltaX = anchorX - currentAnchor.x;
+		long deltaY = anchorY - currentAnchor.y;
+
+		for (const auto& figure : m_figures)
+		{
+			auto figureAnchor = figure->Frame()->leftTop;
+			figure->Move(figureAnchor.x + deltaX, figureAnchor.y + deltaY);
+		}
+		CalculateFrame();
+	}
+
 	void Add(std::shared_ptr<IFigure> figure)
 	{
 		m_figures.emplace_back(std::move(figure));

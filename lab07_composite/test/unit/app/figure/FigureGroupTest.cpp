@@ -80,3 +80,24 @@ TEST(FigureGroupTest, MustCallDrawOnAllItems)
 
 	figureGroup.Draw(mockCanvas);
 }
+
+TEST(FigureGroupTest, MovingGroupTest)
+{
+	CFigureGroup figureGroup;
+
+	using ::testing::NiceMock;
+	using ::testing::Ref;
+	using ::testing::Return;
+
+	auto mockFigure1 = std::make_shared<NiceMock<MockFigure>>();
+	ON_CALL(*mockFigure1, Frame()).WillByDefault(Return(SFrame{ { 10, 30 }, { 35, 50 } }));
+	figureGroup.Add(mockFigure1);
+
+	auto mockFigure2 = std::make_shared<NiceMock<MockFigure>>();
+	ON_CALL(*mockFigure2, Frame()).WillByDefault(Return(SFrame{ { 20, 50 }, { 50, 60 } }));
+	figureGroup.Add(mockFigure2);
+
+	EXPECT_CALL(*mockFigure1, Move(50, 90)).Times(1);
+	EXPECT_CALL(*mockFigure2, Move(60, 110)).Times(1);
+	figureGroup.Move(50, 90);
+}

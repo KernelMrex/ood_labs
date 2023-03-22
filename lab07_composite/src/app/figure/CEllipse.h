@@ -41,6 +41,13 @@ public:
 		CalculateFrame();
 	}
 
+	void Move(uint anchorX, uint anchorY) override
+	{
+		m_center.x = anchorX + m_horizontalRadius;
+		m_center.y = anchorY + m_verticalRadius;
+		CalculateFrame();
+	}
+
 private:
 	SPoint m_center;
 	uint m_verticalRadius;

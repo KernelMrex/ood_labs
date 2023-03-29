@@ -45,9 +45,9 @@ add_executable(
         src/app/gum_ball_machine_with_state/state/CSoldOutState.h
         src/app/gum_ball_machine_with_state/state/CHasQuarterState.h
         src/app/gum_ball_machine_with_state/state/CNoQuarterState.h
+        src/app/gum_ball_machine_with_state/state/CMaxQuarterState.h
 
         test/unit/app/gum_ball_machine_with_state/GumballMachineTest.cpp
-        src/app/gum_ball_machine_with_state/state/CMaxQuarterState.h
 )
 target_link_libraries(lab08_state_test LINK_PUBLIC gtest gtest_main gmock ${Boost_LIBRARIES})
 # unit_tests:end

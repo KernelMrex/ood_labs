@@ -84,3 +84,54 @@ TEST(GumballMachineTest, WithMultipleGumballs)
 	machine.EjectQuarter();
 	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(3, 0, 5, std::string(WAITING_FOR_QUARTER)));
 }
+
+TEST(GumballMachineTest, EjectingMultipleQuarters)
+{
+	CGumballMachine machine(4, 5);
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 0, 5, std::string(WAITING_FOR_QUARTER)));
+
+	machine.InsertQuarter();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 1, 5, std::string(WAITING_FOR_TURN)));
+
+	machine.InsertQuarter();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 2, 5, std::string(WAITING_FOR_TURN)));
+
+	machine.EjectQuarter();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 0, 5, std::string(WAITING_FOR_QUARTER)));
+}
+
+TEST(GumballMachineTest, MultipleEjectingGumballsOnOneQuarter)
+{
+	CGumballMachine machine(4, 5);
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 0, 5, std::string(WAITING_FOR_QUARTER)));
+
+	machine.InsertQuarter();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 1, 5, std::string(WAITING_FOR_TURN)));
+
+	machine.TurnCrank();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(3, 0, 5, std::string(WAITING_FOR_QUARTER)));
+
+	machine.TurnCrank();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(3, 0, 5, std::string(WAITING_FOR_QUARTER)));
+}
+
+TEST(GumballMachineTest, MultipleEjectingGumballsOnMultipleQuarters)
+{
+	CGumballMachine machine(4, 5);
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 0, 5, std::string(WAITING_FOR_QUARTER)));
+
+	machine.InsertQuarter();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 1, 5, std::string(WAITING_FOR_TURN)));
+
+	machine.InsertQuarter();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(4, 2, 5, std::string(WAITING_FOR_TURN)));
+
+	machine.TurnCrank();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(3, 1, 5, std::string(WAITING_FOR_TURN)));
+
+	machine.TurnCrank();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(2, 0, 5, std::string(WAITING_FOR_QUARTER)));
+
+	machine.TurnCrank();
+	ASSERT_EQ(machine.ToString(), GetGumballMachineStateDescription(2, 0, 5, std::string(WAITING_FOR_QUARTER)));
+}
